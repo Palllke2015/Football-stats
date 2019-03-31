@@ -31,6 +31,11 @@ class MatchList extends Component {
     }
     const { matches } = this.state.result;
     const { currentMatchday } = this.props;
+    const dateNow = Date.parse(new Date());
+    const filteredMatch = matches.filter((elem) => {
+      return dateNow - Date.parse(elem.utcDate) < 1209600000 && elem.status === 'FINISHED'
+    });
+    console.log('much filter by date', filteredMatch)
     const FilteredMatch = matches.filter((elem) => elem.matchday === currentMatchday - 1)
       .map((elem) => {
         return(
