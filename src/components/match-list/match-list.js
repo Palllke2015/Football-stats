@@ -30,24 +30,27 @@ class MatchList extends Component {
       )
     }
     const { matches } = this.state.result;
-    const { currentMatchday } = this.props;
-    const dateNow = Date.parse(new Date());
-    const filteredMatch = matches.filter((elem) => {
-      return dateNow - Date.parse(elem.utcDate) < 1209600000 && elem.status === 'FINISHED'
+    const result = matches.sort((a, b)=> {
+      if (a.utcDate < b.utcDate) {
+        return -1
+      }
+      if (a.utcDate > b.utcDate) {
+        return 1
+      }
+      return 0
     });
-    console.log('much filter by date', filteredMatch)
-    const FilteredMatch = matches.filter((elem) => elem.matchday === currentMatchday - 1)
-      .map((elem) => {
-        return(
-          <Match key={elem.id} info={elem} />
-        )
-      });
-
+    const wasMatches = result.filter((elem) => elem.status === 'FINISHED').reverse().splice(0, 10).reverse().map((elem) => {
+      return  <Match key={elem.id} info={elem} />
+    });
+    const willBeMatches =  result.filter((elem) => elem.status === 'SCHEDULED').splice(0, 10).map((elem) => {
+      return  <Match key={elem.id} info={elem} />
+    });
     return(
       <div>
-        <h2>League</h2>
+        <h2>Match List</h2>
         <ul className='list-group'>
-          {FilteredMatch}
+          {wasMatches}
+          {willBeMatches}
         </ul>
       </div>
     )

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import CallApi from "../../services/callApi";
 import MatchList from "../match-list";
 import { connect } from 'react-redux';
-import { SHOW_MATCH_LIST, DISPATCH_ACTION } from "../../actionCreators";
+import { SHOW_MATCH_LIST } from "../../actionCreators";
 import Spinner from '../spinner'
 
 class League extends Component {
@@ -24,7 +24,7 @@ class League extends Component {
   }
 
   render() {
-    const { matchListShow, SHOW_MATCH_LIST, DISPATCH_ACTION } = this.props;
+    const { matchListShow, SHOW_MATCH_LIST } = this.props;
     const { name, currentSeason: { currentMatchday } } = this.state.data;
     const matchList = matchListShow ? <MatchList currentMatchday={currentMatchday} /> : null;
     const buttonText = matchListShow ? 'Hide Matches' : 'Show Matches';
@@ -42,7 +42,6 @@ class League extends Component {
         <li className="list-group-item">
           <h2>{ name }</h2>
           <button className='btn btn-primary' onClick={SHOW_MATCH_LIST}>{buttonText}</button>
-          <button className='btn btn-primary' onClick={ DISPATCH_ACTION }>DISPATCH_ACTION</button>
           {matchList}
         </li>
       </div>
@@ -57,8 +56,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  SHOW_MATCH_LIST,
-  DISPATCH_ACTION
-}
+  SHOW_MATCH_LIST
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(League);

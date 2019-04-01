@@ -1,14 +1,7 @@
 import React, { Component } from 'react'
-import CallApi from "../../services/callApi";
+
 
 class Match extends Component {
-  CallApi = new CallApi();
-  showListOfMatchs = () => {
-    this.CallApi
-      .getTeamFinishedMatchList('338')
-      .then((result) => console.log(result))
-      .catch(error => console.log(error.message))
-  }
   render() {
     const { info } = this.props;
     const {
@@ -25,7 +18,6 @@ class Match extends Component {
     } = info;
     if (status === 'FINISHED') {
       return <li className='d-flex justify-content-between border-bottom'><span style={{width:250}}>{homeTeam}</span> <span>{golCountHome} : {golCountGuest}</span> <span style={{width:250, textAlign: 'right'}}>{guestTeam}</span>
-        <button onClick={this.showListOfMatchs}> show info lasts match</button>
       </li>
     }
     if (status === 'SCHEDULED') {
