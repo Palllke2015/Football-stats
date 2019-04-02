@@ -41,7 +41,4 @@ class MatchList extends Component {
   }
 }
 
-
-
-
-export default (MatchList);
+export default MatchList;

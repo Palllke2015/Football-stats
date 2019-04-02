@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { DISPATCH_ACTION } from "../../actionCreators";
+import { DISPATCH_ACTION, SHOW_LAST_MATCHES } from "../../actionCreators";
 
 
 class Match extends Component {
   render() {
+
     const { info } = this.props;
     const {
       awayTeam: {
@@ -19,7 +20,7 @@ class Match extends Component {
       utcDate
     } = info;
     if (status === 'FINISHED') {
-      return <li className='d-flex justify-content-between border-bottom'><span style={{width:250}}>{homeTeam}</span> <span>{golCountHome} : {golCountGuest}</span> <span style={{width:250, textAlign: 'right'}}>{guestTeam}</span>
+      return <li className='d-flex justify-content-between border-bottom' onClick={this.teamInfo}><span style={{width:250}}>{homeTeam}</span> <span>{golCountHome} : {golCountGuest}</span> <span style={{width:250, textAlign: 'right'}}>{guestTeam}</span>
       </li>
     }
     if (status === 'SCHEDULED') {
@@ -46,16 +47,16 @@ class Match extends Component {
     )
   }
   teamInfo = () => {
-    const { info, DISPATCH_ACTION} = this.props;
+    const { info, DISPATCH_ACTION, SHOW_LAST_MATCHES} = this.props;
     DISPATCH_ACTION(`teams/${info.awayTeam.id}/matches`, 'FETCH_TEAM_INFO_AWAY');
-    DISPATCH_ACTION(`teams/${info.homeTeam.id}/matches`, 'FETCH_TEAM_INFO_HOME')
-
+    DISPATCH_ACTION(`teams/${info.homeTeam.id}/matches`, 'FETCH_TEAM_INFO_HOME');
+    SHOW_LAST_MATCHES();
   }
 }
 
 const mapDispatchToProps = {
   DISPATCH_ACTION,
-
+  SHOW_LAST_MATCHES
 };
 
 export default connect(null, mapDispatchToProps)(Match);

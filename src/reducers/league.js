@@ -6,7 +6,8 @@ const initialState = {
   matchId: null,
   teamInfo: null,
   teamInfoHome: null,
-  teamInfoAway: null
+  teamInfoAway: null,
+  showLastsMatches: false
 };
 
 
@@ -14,10 +15,9 @@ const league = (state = initialState, action) => {
 
   switch (action.type) {
 
-    case 'SHOW_MATCH_INFO':
-        console.log(action.payload);
+    case 'SHOW_LAST_MATCHES':
         return {...state,
-              matchId: action.payload.id};
+          showLastsMatches: !state.showLastsMatches};
 
     case 'FETCH':
 

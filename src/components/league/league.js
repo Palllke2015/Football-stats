@@ -25,7 +25,7 @@ class League extends Component {
   }
 
   render() {
-    const { isLoading , SHOW_MATCH_LIST, DISPATCH_ACTION,  matchList: list} = this.props;
+    const { isLoading = true , SHOW_MATCH_LIST, DISPATCH_ACTION,  matchList: list} = this.props;
     const { name, code } = this.state.data;
     const matchList = isLoading ? null : <MatchList
       matches={list}
