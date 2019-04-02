@@ -2,12 +2,13 @@ import React, {Component} from 'react'
 import CallApi from "../../services/callApi";
 import MatchList from "../match-list";
 import { connect } from 'react-redux';
-import { SHOW_MATCH_LIST } from "../../actionCreators";
+import { SHOW_MATCH_LIST, DISPATCH_ACTION } from "../../actionCreators";
 import Spinner from '../spinner'
 
 class League extends Component {
   state = {
     data:{
+      code: '',
       currentSeason: {
         currentMatchday: null
       }
@@ -24,11 +25,18 @@ class League extends Component {
   }
 
   render() {
-    const { matchListShow, SHOW_MATCH_LIST } = this.props;
-    const { name, currentSeason: { currentMatchday } } = this.state.data;
-    const matchList = matchListShow ? <MatchList currentMatchday={currentMatchday} /> : null;
-    const buttonText = matchListShow ? 'Hide Matches' : 'Show Matches';
+    const { isLoading , SHOW_MATCH_LIST, DISPATCH_ACTION,  matchList: list} = this.props;
+    const { name, code } = this.state.data;
+    const matchList = isLoading ? null : <MatchList
+      matches={list}
+      isLoading={isLoading}
+    />;
+    const buttonText = isLoading ? 'Show Matches': 'Hide Matches';
 
+    const showMatchList = () => {
+      SHOW_MATCH_LIST();
+      DISPATCH_ACTION(`competitions/${code}/matches`, 'SHOW_MATCH_LIST');
+    };
 
     if (this.state.isLoading) {
       return (
@@ -41,7 +49,7 @@ class League extends Component {
       <div>
         <li className="list-group-item">
           <h2>{ name }</h2>
-          <button className='btn btn-primary' onClick={SHOW_MATCH_LIST}>{buttonText}</button>
+          <button className='btn btn-primary' onClick={showMatchList}>{buttonText}</button>
           {matchList}
         </li>
       </div>
@@ -49,14 +57,14 @@ class League extends Component {
   }
 }
 
-
-
 const mapStateToProps = (state) => ({
-  matchListShow: state.league.matchListShow
+  matchList: state.league.matchListShow.list,
+  isLoading: state.league.matchListShow.isLoading,
 });
 
 const mapDispatchToProps = {
-  SHOW_MATCH_LIST
+  SHOW_MATCH_LIST,
+  DISPATCH_ACTION
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(League);

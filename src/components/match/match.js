@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import { DISPATCH_ACTION } from "../../actionCreators";
 
 
 class Match extends Component {
@@ -28,14 +30,32 @@ class Match extends Component {
       const minutes = date.getMinutes();
       const arr = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Ноябрь', 'Декабрь'];
 
-      return <li className='d-flex justify-content-between border-bottom'><span style={{width:250}}>{homeTeam}</span> <span>{day} {arr[month]} - {hours}:{minutes}</span> <span style={{width:250, textAlign: 'right'}}>{guestTeam}</span></li>
+      return <li className='d-flex justify-content-between border-bottom' onClick={this.teamInfo}>
+        <span
+          style={{width:250}}
+        >{homeTeam}</span> <span>
+        {day} {arr[month]} - {hours}:{minutes}
+      </span> <span
+        style={{width:250, textAlign: 'right'}}
+      >{guestTeam}</span>
+      </li>
     }
 
     return (
-      <li className='d-flex justify-content-center border-bottom'>{homeTeam} -  {guestTeam}</li>
-
+      <li className='d-flex justify-content-center border-bottom' onClick={this.teamInfo}>{homeTeam} -  {guestTeam}</li>
     )
+  }
+  teamInfo = () => {
+    const { info, DISPATCH_ACTION} = this.props;
+    DISPATCH_ACTION(`teams/${info.awayTeam.id}/matches`, 'FETCH_TEAM_INFO_AWAY');
+    DISPATCH_ACTION(`teams/${info.homeTeam.id}/matches`, 'FETCH_TEAM_INFO_HOME')
+
   }
 }
 
-export default Match;
+const mapDispatchToProps = {
+  DISPATCH_ACTION,
+
+};
+
+export default connect(null, mapDispatchToProps)(Match);

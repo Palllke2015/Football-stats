@@ -1,35 +1,19 @@
 import React, { Component } from 'react'
-import CallApi from "../../services/callApi";
 import Match from '../match'
+
 import Spinner from "../spinner";
 
-class MatchList extends Component {
-  state = {
-    result: {
-      matches: [{
-        utcDate: '',
-        matchday: null
-      }]
-    },
-    isLoading: true
-  };
-  CallApi = new CallApi();
-  componentDidMount() {
-    this.CallApi
-      .getMatchList('PL')
-      .then((result) => this.setState({result, isLoading: false}))
-      .catch(error => console.log(error.message))
-  }
 
+class MatchList extends Component {
   render() {
-    if (this.state.isLoading) {
+    const {matches: {matches} , isLoading} = this.props;
+    if (isLoading ) {
       return (
         <ul>
           <Spinner />
         </ul>
       )
     }
-    const { matches } = this.state.result;
     const result = matches.sort((a, b)=> {
       if (a.utcDate < b.utcDate) {
         return -1
@@ -58,4 +42,6 @@ class MatchList extends Component {
 }
 
 
-export  default MatchList;
+
+
+export default (MatchList);

@@ -2,7 +2,7 @@ import { DISPATCH_ACTION } from '../actionCreators'
 
 const apiMiddleware = (store) => next => action => {
 
-  if (action.type !== 'DISPATCH_ACTION') {
+  if (action.type !== 'FETCH') {
     return next(action);
   } else {
     const serverInfo = {
@@ -10,14 +10,13 @@ const apiMiddleware = (store) => next => action => {
       dataType: 'json',
       type: 'GET'
     };
-    const _apiBase = 'https://api.football-data.org/v2/teams/65/matches?status=FINISHED';
+    const _apiBase = 'https://api.football-data.org/v2/';
 
-    fetch(_apiBase, serverInfo)
+     fetch(`${_apiBase}${action.payload}`, serverInfo)
       // convert the response to json
         .then(resp => resp.json())
-        .then( json => {
-          console.log(json);
-          next(DISPATCH_ACTION(json))
+        .then( async json => {
+          await next(DISPATCH_ACTION(json, action.meta.type))
         })
         .catch( err => console.log(err))
 

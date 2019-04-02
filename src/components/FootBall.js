@@ -1,6 +1,9 @@
 import React , { Component }from 'react'
+import { connect } from 'react-redux';
 
 import League from './league'
+import Modal from './modal'
+
 
 class FootBall extends Component {
 
@@ -13,10 +16,14 @@ class FootBall extends Component {
           </ul>
 
 
+          <div className="custom-modal-wrapper">
+            <Modal />
+          </div>
         </div>
 
       )
     }
 }
 
-export default FootBall;
+
+export default connect()(FootBall);
