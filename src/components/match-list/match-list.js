@@ -7,13 +7,14 @@ import Spinner from "../spinner";
 class MatchList extends Component {
   render() {
     const {matches: {matches} , isLoading} = this.props;
-    if (isLoading ) {
+    if (isLoading || matches === undefined) {
       return (
         <ul>
           <Spinner />
         </ul>
       )
     }
+
     const result = matches.sort((a, b)=> {
       if (a.utcDate < b.utcDate) {
         return -1

@@ -14,18 +14,17 @@ class TeamInfo extends Component{
       }
       return 0
     });
-    console.log(result.filter((elem) => elem.status === 'FINISHED').reverse().slice(0,5).reverse())
     const lastMatches = result.filter((elem) => elem.status === 'FINISHED').reverse().slice(0,5).reverse().map((elem)=> {
       if (elem.score.winner === "DRAW") {
-        return <li key={elem.id}>DRAW</li>
+        return <li key={elem.id}>DRAW {elem.competition.name}</li>
       }
       if (elem.homeTeam.id === teamId && elem.score.winner === 'HOME_TEAM') {
-        return <li key={elem.id}>W</li>
+        return <li key={elem.id}>W {elem.competition.name}</li>
       }
       if (elem.awayTeam.id === teamId && elem.score.winner === 'AWAY_TEAM') {
-        return <li key={elem.id}>W</li>
+        return <li key={elem.id}>W {elem.competition.name}</li>
       }
-      return <li key={elem.id}>L</li>
+      return <li key={elem.id}>L {elem.competition.name}</li>
     });
 
 
@@ -42,7 +41,7 @@ class TeamInfo extends Component{
         currentTeam = elem.awayTeam.name;
       }
       return(
-        <li key={elem.id}><span>{currentTeam}</span> {new Date(elem.utcDate).toLocaleString()} <span>{enemyTeam}</span></li>
+        <li key={elem.id}><span>{currentTeam}</span> {new Date(elem.utcDate).toLocaleString()} <span>{enemyTeam}</span> {elem.competition.name}</li>
       )
     });
     return(

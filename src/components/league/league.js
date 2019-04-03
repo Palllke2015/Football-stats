@@ -1,32 +1,26 @@
 import React, {Component} from 'react'
-import CallApi from "../../services/callApi";
 import MatchList from "../match-list";
 import { connect } from 'react-redux';
 import { SHOW_MATCH_LIST, DISPATCH_ACTION } from "../../actionCreators";
 import Spinner from '../spinner'
 
 class League extends Component {
-  state = {
-    data:{
-      code: '',
-      currentSeason: {
-        currentMatchday: null
-      }
-    },
-    isLoading: true
-  };
 
-  CallApi = new CallApi();
   componentDidMount() {
-    this.CallApi
-      .getCompetitions('PL')
-      .then((data) => this.setState({data, isLoading:false}))
-      .catch((error) => console.log(error.message));
+    const { DISPATCH_ACTION } = this.props;
+    DISPATCH_ACTION(`competitions/2021/standings`, 'FETCH_TOURNAMENT_TABLE');
+
   }
 
   render() {
-    const { isLoading = true , SHOW_MATCH_LIST, DISPATCH_ACTION,  matchList: list} = this.props;
-    const { name, code } = this.state.data;
+    const { isLoading = true , SHOW_MATCH_LIST, DISPATCH_ACTION,  matchList: list, leagueInfo } = this.props;
+    if (leagueInfo === undefined || leagueInfo === null ) {
+      return <li className="list-group-item">
+        <Spinner />
+      </li>
+    }
+    const { competition:{ name, code}} = leagueInfo
+
     const matchList = isLoading ? null : <MatchList
       matches={list}
       isLoading={isLoading}
@@ -38,13 +32,6 @@ class League extends Component {
       DISPATCH_ACTION(`competitions/${code}/matches`, 'SHOW_MATCH_LIST');
     };
 
-    if (this.state.isLoading) {
-      return (
-        <li className="list-group-item">
-          <Spinner />
-        </li>
-        )
-    }
     return(
       <div>
         <li className="list-group-item">
@@ -60,6 +47,7 @@ class League extends Component {
 const mapStateToProps = (state) => ({
   matchList: state.league.matchListShow.list,
   isLoading: state.league.matchListShow.isLoading,
+  leagueInfo: state.league.tournamentTable
 });
 
 const mapDispatchToProps = {

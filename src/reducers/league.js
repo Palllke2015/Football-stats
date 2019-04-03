@@ -3,13 +3,15 @@ const initialState = {
     isLoading: true,
     list: null
   },
+  currentLeague: null,
   matchId: null,
   teamInfo: null,
   teamInfoHome: null,
   teamInfoHomeId: null,
   teamInfoAway: null,
   teamInfoAwayId: null,
-  showLastsMatches: false
+  showLastsMatches: false,
+  tournamentTable: null
 };
 
 
@@ -44,6 +46,9 @@ const league = (state = initialState, action) => {
               list: action.payload,
               isLoading: !state.matchListShow.isLoading
           }};
+        case 'FETCH_TOURNAMENT_TABLE':
+          return {...state,
+            tournamentTable: action.payload};
 
         default:
           return state;
