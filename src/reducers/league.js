@@ -6,7 +6,9 @@ const initialState = {
   matchId: null,
   teamInfo: null,
   teamInfoHome: null,
+  teamInfoHomeId: null,
   teamInfoAway: null,
+  teamInfoAwayId: null,
   showLastsMatches: false
 };
 
@@ -29,11 +31,13 @@ const league = (state = initialState, action) => {
 
         case 'FETCH_TEAM_INFO_HOME':
           return {...state,
-            teamInfoHome: action.payload};
+            teamInfoHome: action.payload,
+            teamInfoHomeId: action.id};
 
         case 'FETCH_TEAM_INFO_AWAY':
           return {...state,
-            teamInfoAway: action.payload};
+            teamInfoAway: action.payload,
+            teamInfoAwayId: action.id};
         case 'SHOW_MATCH_LIST':
           return {...state,
             matchListShow: {

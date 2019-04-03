@@ -48,8 +48,8 @@ class Match extends Component {
   }
   teamInfo = () => {
     const { info, DISPATCH_ACTION, SHOW_LAST_MATCHES} = this.props;
-    DISPATCH_ACTION(`teams/${info.awayTeam.id}/matches`, 'FETCH_TEAM_INFO_AWAY');
-    DISPATCH_ACTION(`teams/${info.homeTeam.id}/matches`, 'FETCH_TEAM_INFO_HOME');
+    DISPATCH_ACTION(`teams/${info.awayTeam.id}/matches`, 'FETCH_TEAM_INFO_AWAY', info.awayTeam.id);
+    DISPATCH_ACTION(`teams/${info.homeTeam.id}/matches`, 'FETCH_TEAM_INFO_HOME', info.homeTeam.id);
     SHOW_LAST_MATCHES();
   }
 }

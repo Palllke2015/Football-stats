@@ -20,11 +20,13 @@
     padding: 50px;
     position: relative;
     display: flex;
+    justify-content: space-between;
+    overflow-y: scroll;
 }
 .custom-modal__button {
     position: absolute;
-    right: 5%;
-    top: 5%;
+    right: 1%;
+    top: 1%;
 }
 
 .custom-modal__right, .custom-modal__left {

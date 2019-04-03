@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
-import MatchList from '../match-list'
 import { connect } from "react-redux";
 import { SHOW_LAST_MATCHES } from '../../actionCreators'
 import './style.css'
+import TeamInfo from "../team-info";
 
 class Modal extends Component{
 
   render() {
-    const {matchListHome, matchListAway, SHOW_LAST_MATCHES} = this.props;
+    const {matchListHome, matchListHomeId, matchListAway, matchListAwayId, SHOW_LAST_MATCHES} = this.props;
     if (matchListHome === null || matchListAway === null) {
       return null
     }
@@ -15,14 +15,10 @@ class Modal extends Component{
       <div className="custom-modal">
         <button className="btn btn-danger custom-modal__button" onClick={SHOW_LAST_MATCHES}>Close</button>
         <div className="custom-modal__left">
-          <MatchList
-            matches={matchListHome}
-          />
+          <TeamInfo matchList={matchListHome} teamId={matchListHomeId}/>
         </div>
         <div className="custom-modal__right">
-          <MatchList
-            matches={matchListAway}
-          />
+          <TeamInfo matchList={matchListAway} teamId={matchListAwayId}/>
         </div>
       </div>
     )
@@ -31,8 +27,9 @@ class Modal extends Component{
 
 const mapStateToProps = (state) => ({
   matchListHome: state.league.teamInfoHome,
+  matchListHomeId: state.league.teamInfoHomeId,
   matchListAway: state.league.teamInfoAway,
-  isLoading: state.league.matchListShow.isLoading,
+  matchListAwayId: state.league.teamInfoAwayId
 });
 
 export default connect(mapStateToProps, {SHOW_LAST_MATCHES})(Modal);
