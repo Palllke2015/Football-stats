@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import League from './league'
 import Modal from './modal'
+import Table from './table'
 
 
 class FootBall extends Component {
@@ -21,7 +22,7 @@ class FootBall extends Component {
           </ul>
           { modal }
 
-
+        <Table />
         </div>
 
       )
