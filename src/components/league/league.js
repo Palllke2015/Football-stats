@@ -1,25 +1,21 @@
 import React, {Component} from 'react'
 import MatchList from "../match-list";
 import { connect } from 'react-redux';
-import { SHOW_MATCH_LIST, DISPATCH_ACTION } from "../../actionCreators";
+import { SHOW_MATCH_LIST } from "../../actionCreators";
 import Spinner from '../spinner'
 
 class League extends Component {
 
-  componentDidMount() {
-    const { DISPATCH_ACTION } = this.props;
-    DISPATCH_ACTION(`competitions/2021/standings`, 'FETCH_TOURNAMENT_TABLE');
 
-  }
 
   render() {
-    const { isLoading = true , SHOW_MATCH_LIST, DISPATCH_ACTION,  matchList: list, leagueInfo } = this.props;
+    const { isLoading = true , SHOW_MATCH_LIST,  matchList: list, leagueInfo } = this.props;
     if (leagueInfo === undefined || leagueInfo === null ) {
       return <li className="list-group-item">
         <Spinner />
       </li>
     }
-    const { competition:{ name, code}} = leagueInfo
+    const { competition:{ name }} = leagueInfo;
 
     const matchList = isLoading ? null : <MatchList
       matches={list}
@@ -29,7 +25,6 @@ class League extends Component {
 
     const showMatchList = () => {
       SHOW_MATCH_LIST();
-      DISPATCH_ACTION(`competitions/${code}/matches`, 'SHOW_MATCH_LIST');
     };
 
     return(
@@ -51,8 +46,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  SHOW_MATCH_LIST,
-  DISPATCH_ACTION
+  SHOW_MATCH_LIST
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(League);

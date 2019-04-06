@@ -10,7 +10,6 @@ class Table extends Component {
     }
     const { standings } = table;
     const filter = standings.find((elem)=> elem.type === 'TOTAL');
-    console.log(filter.table[0]);
     const { table: list } = filter;
     const res = list.map((elem)=> {
       return <TableItem key={elem.team.id} info={elem} />

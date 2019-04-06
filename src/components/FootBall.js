@@ -1,6 +1,7 @@
 import React , { Component }from 'react'
 import { connect } from 'react-redux';
 import {  Switch, Route } from "react-router-dom";
+import { DISPATCH_ACTION } from "../actionCreators";
 
 
 import League from './league'
@@ -10,6 +11,11 @@ import Header from "./header";
 
 
 class FootBall extends Component {
+  componentDidMount() {
+    const { DISPATCH_ACTION } = this.props;
+    DISPATCH_ACTION(`competitions/2021/standings`, 'FETCH_TOURNAMENT_TABLE');
+
+  }
 
 
   render() {
@@ -38,6 +44,9 @@ class FootBall extends Component {
           }}/>
 
           <Route path="/table" component={Table} exact />
+          <Route render={()=> {
+            return( <h2>Page not exist</h2>)
+          }} />
         </Switch>
 
         </div>
@@ -49,4 +58,4 @@ const mapStateToProps = (state) => ({
 });
 
 
-export default connect(mapStateToProps,)(FootBall);
+export default connect(mapStateToProps,{DISPATCH_ACTION})(FootBall);

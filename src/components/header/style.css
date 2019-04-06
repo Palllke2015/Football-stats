@@ -1,0 +1,7 @@
+.is-active {
+    color: green;
+}
+
+.is-active:hover {
+    color: green;
+}
