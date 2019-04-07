@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import MatchList from "../match-list";
 import { connect } from 'react-redux';
-import { SHOW_MATCH_LIST } from "../../actionCreators";
+import { SHOW_MATCH_LIST, DISPATCH_ACTION } from "../../actionCreators";
 import Spinner from '../spinner'
 
 class League extends Component {
@@ -9,13 +9,13 @@ class League extends Component {
 
 
   render() {
-    const { isLoading = true , SHOW_MATCH_LIST,  matchList: list, leagueInfo } = this.props;
+    const { isLoading = true , SHOW_MATCH_LIST, DISPATCH_ACTION,  matchList: list, leagueInfo } = this.props;
     if (leagueInfo === undefined || leagueInfo === null ) {
       return <li className="list-group-item">
         <Spinner />
       </li>
     }
-    const { competition:{ name }} = leagueInfo;
+    const { leagueInfo : {competition:{ name, code}}} = this.props
 
     const matchList = isLoading ? null : <MatchList
       matches={list}
@@ -25,16 +25,17 @@ class League extends Component {
 
     const showMatchList = () => {
       SHOW_MATCH_LIST();
+      DISPATCH_ACTION(`competitions/${code}/matches`, 'SHOW_MATCH_LIST');
     };
 
     return(
-      <div>
+      <ul className="list-group">
         <li className="list-group-item">
           <h2>{ name }</h2>
           <button className='btn btn-primary' onClick={showMatchList}>{buttonText}</button>
           {matchList}
         </li>
-      </div>
+      </ul>
     )
   }
 }
@@ -46,7 +47,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  SHOW_MATCH_LIST
+  SHOW_MATCH_LIST,
+  DISPATCH_ACTION
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(League);

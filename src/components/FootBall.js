@@ -8,6 +8,7 @@ import League from './league'
 import Modal from './modal'
 import Table from './table'
 import Header from "./header";
+import Test from './test'
 
 
 class FootBall extends Component {
@@ -28,27 +29,23 @@ class FootBall extends Component {
         <Header/>
 
         <Switch>
+          <Route path="/" exact render={()=><h2>Welcome to my app</h2>} />
           <Route
-            path="/"
-            exact
+            path="/last-matches"
             render={()=>{
             return(
               <div>
-                <ul className="list-group">
                   <League/>
-                  <li className="list-group-item">Premier League</li>
-                </ul>
-                { modal }
+                  { modal }
               </div>
             )
-          }}/>
-
+          }} />
           <Route path="/table" component={Table} exact />
           <Route render={()=> {
             return( <h2>Page not exist</h2>)
           }} />
         </Switch>
-
+        <Test />
         </div>
       )
     }
