@@ -1,16 +1,10 @@
 import React from 'react'
 
-const WithLoading = () => (Wrapped) =>{
-
-  return() => {
-    return (
-      <div>
-        <h2>lol</h2>
-        <Wrapped />
-      </div>
-
-      )
+function WithLoading(Wrapped) {
+  return () => {
+    return (<Wrapped />)
   }
-};
+  
+}
 
 export default WithLoading;

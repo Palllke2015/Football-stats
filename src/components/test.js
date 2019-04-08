@@ -1,7 +1,7 @@
 import React from 'react'
 import {WithLoading} from '../hoc'
 
-function Test () {
+const Test = () =>  {
   return(
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, sunt.</p>
   )
