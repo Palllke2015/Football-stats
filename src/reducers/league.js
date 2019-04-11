@@ -1,8 +1,4 @@
 const initialState = {
-  matchListShow: {
-    isLoading: true,
-    list: null
-  },
   loading: true,
   error: false,
   currentLeague: null,
@@ -62,12 +58,6 @@ const league = (state = initialState, action) => {
           return {...state,
             teamInfoAway: action.payload,
             teamInfoAwayId: action.id};
-        case 'SHOW_MATCH_LIST':
-          return {...state,
-            matchListShow: {
-              list: action.payload,
-              isLoading: !state.matchListShow.isLoading
-          }};
 
         default:
           return state;
