@@ -1,21 +1,19 @@
 import React , { Component }from 'react'
 import { connect } from 'react-redux';
 import {  Switch, Route } from "react-router-dom";
-import { DISPATCH_ACTION } from "../actionCreators";
+import { DISPATCH_ACTION, fetchTableStart } from "../actionCreators";
 
 
 import League from './league'
 import Modal from './modal'
 import Table from './table'
 import Header from "./header";
-import Test from './test'
 
 
 class FootBall extends Component {
   componentDidMount() {
-    const { DISPATCH_ACTION } = this.props;
-    DISPATCH_ACTION(`competitions/2021/standings`, 'FETCH_TOURNAMENT_TABLE');
-
+    const {  fetchTableStart } = this.props;
+    fetchTableStart();
   }
 
 
@@ -35,7 +33,7 @@ class FootBall extends Component {
             render={()=>{
             return(
               <div>
-                  <League/>
+                  <League league={"PL"}/>
                   { modal }
               </div>
             )
@@ -45,7 +43,6 @@ class FootBall extends Component {
             return( <h2>Page not exist</h2>)
           }} />
         </Switch>
-        <Test />
         </div>
       )
     }
@@ -55,4 +52,4 @@ const mapStateToProps = (state) => ({
 });
 
 
-export default connect(mapStateToProps,{DISPATCH_ACTION})(FootBall);
+export default connect(mapStateToProps,{DISPATCH_ACTION, fetchTableStart})(FootBall);

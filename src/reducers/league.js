@@ -3,6 +3,8 @@ const initialState = {
     isLoading: true,
     list: null
   },
+  loading: true,
+  error: false,
   currentLeague: null,
   matchId: null,
   teamInfo: null,
@@ -10,8 +12,7 @@ const initialState = {
   teamInfoHomeId: null,
   teamInfoAway: null,
   teamInfoAwayId: null,
-  showLastsMatches: false,
-  tournamentTable: null
+  showLastsMatches: false
 };
 
 
@@ -23,8 +24,29 @@ const league = (state = initialState, action) => {
         return {...state,
           showLastsMatches: !state.showLastsMatches};
 
-    case 'FETCH':
+    case "FETCH_BEGIN":
 
+      return {
+        ...state,
+        loading: true,
+        error: null
+      };
+
+    case "FETCH_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        items: action.payload
+      };
+
+    case "FETCH_FAIL":
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.error
+      };
+
+    case 'FETCH':
       switch (action.meta.type) {
 
         case 'FETCH_TEAM_INFO':
@@ -46,14 +68,10 @@ const league = (state = initialState, action) => {
               list: action.payload,
               isLoading: !state.matchListShow.isLoading
           }};
-        case 'FETCH_TOURNAMENT_TABLE':
-          return {...state,
-            tournamentTable: action.payload};
 
         default:
           return state;
       }
-
 
       default:
         return state;

@@ -18,7 +18,9 @@ const apiMiddleware = (store) => next => action => {
         .then( async json => {
           await next(DISPATCH_ACTION(json, action.meta.type, action.id))
         })
-        .catch( err => console.log(err))
+        .catch( err => {
+          console.log(err)
+        })
 
   }
 };

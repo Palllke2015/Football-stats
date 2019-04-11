@@ -6,8 +6,8 @@ import Spinner from "../spinner";
 
 class MatchList extends Component {
   render() {
-    const {matches: {matches} , isLoading} = this.props;
-    if (isLoading || matches === undefined) {
+    const {matches, isLoading} = this.props;
+    if (isLoading) {
       return (
         <ul>
           <Spinner />

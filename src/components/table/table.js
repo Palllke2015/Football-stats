@@ -6,7 +6,11 @@ class Table extends Component {
   render() {
     const { table } = this.props;
     if (table === null) {
-      return (<h2>Loading</h2>)
+      return (<div>
+        <div className="spinner-border text-primary" role="status">
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>)
     }
     const { standings } = table;
     const filter = standings.find((elem)=> elem.type === 'TOTAL');
@@ -35,7 +39,7 @@ class Table extends Component {
 }
 
 const props = (state) => ({
-  table: state.league.tournamentTable
+  table: state.table.data
 });
 
 export default connect(props)(Table);

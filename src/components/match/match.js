@@ -25,7 +25,7 @@ class Match extends Component {
     }
     if (status === 'SCHEDULED') {
       const date = new Date(utcDate);
-      const day = date.getDay();
+      const day = date.getDate();
       const month = date.getMonth();
       const hours = date.getHours();
       const minutes = date.getMinutes();
