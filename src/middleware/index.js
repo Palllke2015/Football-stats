@@ -16,7 +16,7 @@ const apiMiddleware = (store) => next => action => {
       // convert the response to json
         .then(resp => resp.json())
         .then( async json => {
-          await next(DISPATCH_ACTION(json, action.meta.type, action.id))
+          await next(DISPATCH_ACTION(json, action.meta.type, action.name))
         })
         .catch( err => {
           console.log(err)

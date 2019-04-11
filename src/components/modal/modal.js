@@ -7,7 +7,7 @@ import TeamInfo from "../team-info";
 class Modal extends Component{
 
   render() {
-    const {matchListHome, matchListHomeId, matchListAway, matchListAwayId, SHOW_LAST_MATCHES} = this.props;
+    const {matchListHome, matchListHomeName, matchListAway, matchListAwayName, SHOW_LAST_MATCHES} = this.props;
     if (matchListHome === null || matchListAway === null) {
       return null
     }
@@ -15,10 +15,12 @@ class Modal extends Component{
       <div className="custom-modal">
         <button className="btn btn-danger custom-modal__button" onClick={SHOW_LAST_MATCHES}>Close</button>
         <div className="custom-modal__left">
-          <TeamInfo matchList={matchListHome} teamId={matchListHomeId}/>
+          <h2>{matchListHomeName}</h2>
+          <TeamInfo matchList={matchListHome} teamName={matchListHomeName}/>
         </div>
         <div className="custom-modal__right">
-          <TeamInfo matchList={matchListAway} teamId={matchListAwayId}/>
+          <h2>{matchListAwayName}</h2>
+          <TeamInfo matchList={matchListAway} teamName={matchListAwayName}/>
         </div>
       </div>
     )
@@ -26,10 +28,10 @@ class Modal extends Component{
 }
 
 const mapStateToProps = (state) => ({
-  matchListHome: state.league.teamInfoHome,
-  matchListHomeId: state.league.teamInfoHomeId,
-  matchListAway: state.league.teamInfoAway,
-  matchListAwayId: state.league.teamInfoAwayId
+  matchListHome: state.modal.data.homeTeam,
+  matchListHomeName: state.modal.data.homeTeamName,
+  matchListAway: state.modal.data.awayTeam,
+  matchListAwayName: state.modal.data.awayTeamName
 });
 
 export default connect(mapStateToProps, {SHOW_LAST_MATCHES})(Modal);

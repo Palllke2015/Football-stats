@@ -4,6 +4,7 @@ import thunk from 'redux-thunk'
 import apiMiddleware from "../middleware";
 import table from "../middleware/table";
 import matchList from "../middleware/matchList";
+import modal from "../middleware/modal";
 
 const store = createStore(
   reducer,
@@ -11,7 +12,8 @@ const store = createStore(
     thunk,
     apiMiddleware,
     table,
-    matchList));
+    matchList,
+    modal));
 //dev only!!!
 window.store = store;
 

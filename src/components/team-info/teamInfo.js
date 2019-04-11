@@ -4,7 +4,7 @@ import React, {Component} from 'react'
 class TeamInfo extends Component{
 
   render() {
-    const { matchList: {matches}, teamId } = this.props;
+    const { matchList: {matches}, teamName } = this.props;
     const result = matches.sort((a,b) => {
       if (a.utcDate < b.utcDate) {
         return -1
@@ -18,10 +18,10 @@ class TeamInfo extends Component{
       if (elem.score.winner === "DRAW") {
         return <li key={elem.id}>DRAW {elem.competition.name}</li>
       }
-      if (elem.homeTeam.id === teamId && elem.score.winner === 'HOME_TEAM') {
+      if (elem.homeTeam.name === teamName && elem.score.winner === 'HOME_TEAM') {
         return <li key={elem.id}>W {elem.competition.name}</li>
       }
-      if (elem.awayTeam.id === teamId && elem.score.winner === 'AWAY_TEAM') {
+      if (elem.awayTeam.name === teamName && elem.score.winner === 'AWAY_TEAM') {
         return <li key={elem.id}>W {elem.competition.name}</li>
       }
       return <li key={elem.id}>L {elem.competition.name}</li>
@@ -32,11 +32,11 @@ class TeamInfo extends Component{
       let currentTeam;
       let enemyTeam;
 
-      if (elem.homeTeam.id === teamId) {
+      if (elem.homeTeam.name === teamName) {
         currentTeam = elem.homeTeam.name;
         enemyTeam = elem.awayTeam.name;
       }
-      if (elem.awayTeam.id === teamId) {
+      if (elem.awayTeam.name === teamName) {
         enemyTeam = elem.homeTeam.name;
         currentTeam = elem.awayTeam.name;
       }

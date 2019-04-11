@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { DISPATCH_ACTION, SHOW_LAST_MATCHES } from "../../actionCreators";
+import { DISPATCH_ACTION, SHOW_LAST_MATCHES, modalHomeTeamName, modalAwayTeamName, fetchModalStart } from "../../actionCreators";
 
 
 class Match extends Component {
@@ -47,17 +47,23 @@ class Match extends Component {
     )
   }
   teamInfo = () => {
-    const { info, DISPATCH_ACTION, SHOW_LAST_MATCHES} = this.props;
-    DISPATCH_ACTION(`teams/${info.awayTeam.id}/matches`, 'FETCH_TEAM_INFO_AWAY', info.awayTeam.id);
-    DISPATCH_ACTION(`teams/${info.homeTeam.id}/matches`, 'FETCH_TEAM_INFO_HOME', info.homeTeam.id);
+    const { info, DISPATCH_ACTION, SHOW_LAST_MATCHES, modalHomeTeamName, modalAwayTeamName, fetchModalStart} = this.props;
+    DISPATCH_ACTION(`teams/${info.awayTeam.id}/matches`, 'FETCH_TEAM_INFO_AWAY', info.awayTeam.name);
+    DISPATCH_ACTION(`teams/${info.homeTeam.id}/matches`, 'FETCH_TEAM_INFO_HOME', info.homeTeam.name);
     SHOW_LAST_MATCHES();
-
+    modalHomeTeamName(info.homeTeam.name);
+    modalAwayTeamName(info.awayTeam.name);
+    fetchModalStart(info.homeTeam.id, "FETCH_MODAL_HOME_SUCCESS");
+    fetchModalStart(info.awayTeam.id, "FETCH_MODAL_AWAY_SUCCESS");
   }
 }
 
 const mapDispatchToProps = {
   DISPATCH_ACTION,
-  SHOW_LAST_MATCHES
+  SHOW_LAST_MATCHES,
+  modalHomeTeamName,
+  modalAwayTeamName,
+  fetchModalStart
 };
 
 export default connect(null, mapDispatchToProps)(Match);

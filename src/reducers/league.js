@@ -5,9 +5,9 @@ const initialState = {
   matchId: null,
   teamInfo: null,
   teamInfoHome: null,
-  teamInfoHomeId: null,
+  teamInfoHomeName: null,
   teamInfoAway: null,
-  teamInfoAwayId: null,
+  teamInfoAwayName: null,
   showLastsMatches: false
 };
 
@@ -52,12 +52,12 @@ const league = (state = initialState, action) => {
         case 'FETCH_TEAM_INFO_HOME':
           return {...state,
             teamInfoHome: action.payload,
-            teamInfoHomeId: action.id};
+            teamInfoHomeName: action.name};
 
         case 'FETCH_TEAM_INFO_AWAY':
           return {...state,
             teamInfoAway: action.payload,
-            teamInfoAwayId: action.id};
+            teamInfoAwayName: action.name};
 
         default:
           return state;
