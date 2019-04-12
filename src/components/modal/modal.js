@@ -1,26 +1,32 @@
 import React, {Component} from 'react'
 import { connect } from "react-redux";
-import { SHOW_LAST_MATCHES } from '../../actionCreators'
+import { closeModal } from '../../actionCreators'
 import './style.css'
 import TeamInfo from "../team-info";
 
 class Modal extends Component{
 
   render() {
-    const {matchListHome, matchListHomeName, matchListAway, matchListAwayName, SHOW_LAST_MATCHES} = this.props;
-    if (matchListHome === null || matchListAway === null) {
-      return null
-    }
+    const {
+      matchListHome,
+      matchListHomeName,
+      matchListAway,
+      matchListAwayName,
+      closeModal,
+      homeLoading,
+      awayLoading
+    } = this.props;
+
     return(
       <div className="custom-modal">
-        <button className="btn btn-danger custom-modal__button" onClick={SHOW_LAST_MATCHES}>Close</button>
+        <button className="btn btn-danger custom-modal__button" onClick={closeModal}>Close</button>
         <div className="custom-modal__left">
           <h2>{matchListHomeName}</h2>
-          <TeamInfo matchList={matchListHome} teamName={matchListHomeName}/>
+          <TeamInfo matchList={matchListHome} teamName={matchListHomeName} loading={homeLoading}/>
         </div>
         <div className="custom-modal__right">
           <h2>{matchListAwayName}</h2>
-          <TeamInfo matchList={matchListAway} teamName={matchListAwayName}/>
+          <TeamInfo matchList={matchListAway} teamName={matchListAwayName} loading={awayLoading}/>
         </div>
       </div>
     )
@@ -31,7 +37,9 @@ const mapStateToProps = (state) => ({
   matchListHome: state.modal.data.homeTeam,
   matchListHomeName: state.modal.data.homeTeamName,
   matchListAway: state.modal.data.awayTeam,
-  matchListAwayName: state.modal.data.awayTeamName
+  matchListAwayName: state.modal.data.awayTeamName,
+  homeLoading: state.modal.data.homeTeamLoading,
+  awayLoading: state.modal.data.awayTeamLoading
 });
 
-export default connect(mapStateToProps, {SHOW_LAST_MATCHES})(Modal);
+export default connect(mapStateToProps, {closeModal})(Modal);

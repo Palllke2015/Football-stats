@@ -1,13 +1,14 @@
 import React , { Component }from 'react'
 import { connect } from 'react-redux';
 import {  Switch, Route } from "react-router-dom";
-import { DISPATCH_ACTION, fetchTableStart } from "../actionCreators";
+import { fetchTableStart } from "../actionCreators";
 
 
 import League from './league'
 import Modal from './modal'
 import Table from './table'
 import Header from "./header";
+import Chat from './chat'
 
 
 class FootBall extends Component {
@@ -25,7 +26,6 @@ class FootBall extends Component {
       return (
         <div>
         <Header/>
-
         <Switch>
           <Route path="/" exact render={()=><h2>Welcome to my app</h2>} />
           <Route
@@ -43,13 +43,14 @@ class FootBall extends Component {
             return( <h2>Page not exist</h2>)
           }} />
         </Switch>
+        <Chat />
         </div>
       )
     }
 }
 const mapStateToProps = (state) => ({
-  showLastsMatches: state.league.showLastsMatches
+  showLastsMatches: state.modal.show
 });
 
 
-export default connect(mapStateToProps,{DISPATCH_ACTION, fetchTableStart})(FootBall);
+export default connect(mapStateToProps,{ fetchTableStart})(FootBall);

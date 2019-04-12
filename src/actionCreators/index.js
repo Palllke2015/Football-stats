@@ -46,9 +46,9 @@ export const matchListShow = () => ({
   type: "MATCH_LIST_SHOW"
 });
 
+export const fetchModalStart = () => ({type: "FETCH_MODAL_START"})
 
-
-export const fetchModalStart = (link, team, payload) => ({
+export const fetchModalInfo = (link, team, payload) => ({
   type: "FETCH_MODAL_INFO",
   link,
   team,
@@ -65,12 +65,6 @@ export const modalAwayTeamName = (payload) => ({
   payload
 });
 
-export const lol = ( team ,payload ) => ({
-  type: "2",
-  payload,
-  team
-});
-
 export const fetchModalSuccess = () => ({
   type: "FETCH_MODAL_SUCCESS"
 });
@@ -79,3 +73,5 @@ export const fetchModalFail = error => ({
   type: "FETCH_MODAL_FAIL",
   payload:  error
 });
+
+export const closeModal = () => ({type: "CLOSE_MODAL"});
