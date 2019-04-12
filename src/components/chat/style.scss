@@ -1,12 +1,37 @@
 .chat-wrapper {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    border: 2px solid grey;
-    border-radius: 10px;
-    width: 400px;
+  position: fixed;
+  bottom: 1%;
+  right: 1%;
+  border: 2px solid grey;
+  border-radius: 10px;
+  width: 400px;
+  padding: 10px;
+  background: #ffffff;
+  & textarea {
+    width: 100%;
+    resize: none;
+    padding: 10px;
+  }
+  & button {
+    margin: 10px 0 0 auto;
+    display: block;
+  }
 }
 
 .chat-message-wrapper {
+    border-top: 1px solid black;
     margin-left: 10px;
+    padding-top: 20px;
+    height: 300px;
+    overflow-y: scroll;
+    & p {
+      border-bottom: 2px solid grey;
+      padding-bottom: 10px;
+      max-width: 90%;
+      hyphens: auto;
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
 }
