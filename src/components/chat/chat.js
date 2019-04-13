@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import './style.scss'
+import ChatLogin from './chat-login'
 
 class Chat extends Component{
   idCount = 3;
   state = {
+    isLogin: false,
+    userName: '',
     userText: '',
     messages: [
       {
@@ -27,34 +30,34 @@ class Chat extends Component{
 
 
   render() {
-    const { messages } = this.state;
+    const { messages, isLogin, userName } = this.state;
     const messageList = messages.map((elem) => {
       return(
-        <p key={elem.id}>{elem.text}</p>
+        <p key={elem.id}><span>{userName}</span>: {elem.text}</p>
       )
     });
+    const login = !isLogin ? <ChatLogin login={this.login}/> : <div
+      className="chat"
+    >
+      <div
+        className="chat-message-wrapper"
+        ref={ (ref) => this.myRef=ref }
+      >
+        {messageList}
+      </div>
+      <textarea
+        className="chat-text"
+        placeholder="Отправить сообщение"
+        onChange={this.typeMessage}
+        value={this.state.userText}
+        onKeyDown={this.submit}
+      />
+      <button onClick={this.sendMessage}>Отправить</button>
+    </div>;
     return(
       <div className="chat-wrapper">
         <h2>Football Chat</h2>
-        <div
-          className="chat"
-
-        >
-          <div
-            className="chat-message-wrapper"
-            ref={ (ref) => this.myRef=ref }
-          >
-            {messageList}
-          </div>
-          <textarea
-            className="chat-text"
-            placeholder="Отправить сообщение"
-            onChange={this.typeMessage}
-            value={this.state.userText}
-            onKeyDown={this.submit}
-          />
-          <button onClick={this.sendMessage}>Отправить</button>
-        </div>
+        { login }
       </div>
     )
   }
@@ -63,6 +66,9 @@ class Chat extends Component{
       event.preventDefault();
       this.sendMessage();
     }
+  };
+  login = (userName) => {
+    this.setState({ userName, isLogin:true })
   };
   myRef = null;
   scrollToMyRef = () => {
