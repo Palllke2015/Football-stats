@@ -15,7 +15,10 @@ const auth = (state = initStore, action) => {
     case "LOGINED":
       return {...state,
         logined: true,
-        isLogin: true
+        isLogin: true,
+        data:{
+          email: action.email
+        }
       };
     case "LOGIN_USER_START":
       console.log( action.type);

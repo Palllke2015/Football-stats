@@ -9,8 +9,8 @@ export const LOGIN = (email, password) => {
           const user = firebase.auth().currentUser;
           if (user) {
             console.log('logined');
-
             dispatch(loginUserSuccess(user))
+            localStorage.setItem("email", user.email)
           } else {
             console.log('not logined')
           }
@@ -46,7 +46,10 @@ const loginUserFailed = errorMessage => ({
   payload: errorMessage
 });
 
-export const LOGINED = () => ({type: "LOGINED"});
+export const LOGINED = (email) => ({
+  type: "LOGINED",
+  email
+});
 
 
 export const signOut = () => {

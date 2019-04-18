@@ -19,7 +19,7 @@ class LoginBar extends Component{
             const token = localStorage.getItem("token");
             this.setState({loading: false});
             if (token === idToken) {
-              this.props.LOGINED()
+              this.props.LOGINED(localStorage.getItem("email"))
             }
           })
       }
