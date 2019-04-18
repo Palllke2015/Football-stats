@@ -1,7 +1,9 @@
 const initStore = {
   logined: false,
   isLogin: false,
-  data: '',
+  data: {
+    email: false
+  },
   error: false,
   errorMessage: '',
   loading: false,
@@ -24,13 +26,15 @@ const auth = (state = initStore, action) => {
         errorMessage: ''
       };
     case "LOGIN_USER_SUCCESS":
+      console.log( action.type);
       return {...state,
         data: action.payload,
         isLogin: true,
         loading: false
       };
     case "LOGIN_USER_FAILED":
-      console.log( action.type);
+      console.log('Неправельный заход', action.type);
+      console.log( action.payload);
       return {...state,
         error: true,
         loading: false,
@@ -38,7 +42,9 @@ const auth = (state = initStore, action) => {
       };
     case "USER_SIGN_OUT":
       return {...state,
-        data: '',
+        data: {
+          email: false
+        },
         isLogin: false
       };
     case "USER_SIGN_OUT_FAILED":
