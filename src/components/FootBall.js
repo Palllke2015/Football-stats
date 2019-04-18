@@ -9,6 +9,9 @@ import Modal from './modal'
 import Table from './table'
 import Header from "./header";
 import Chat from './chat'
+import LoginBar from './auth/loginBar'
+import Login from './auth/loginBar/login'
+import Registration from './auth/loginBar/registration'
 
 
 class FootBall extends Component {
@@ -25,6 +28,7 @@ class FootBall extends Component {
       </div> : null;
       return (
         <div>
+        <LoginBar />
         <Header/>
         <Switch>
           <Route path="/" exact render={()=><h2>Welcome to my app</h2>} />
@@ -39,6 +43,8 @@ class FootBall extends Component {
             )
           }} />
           <Route path="/table" component={Table} exact />
+          <Route path="/login" component={Login} exact />
+          <Route path="/registration" component={Registration} exact />
           <Route render={()=> {
             return( <h2>Page not exist</h2>)
           }} />
