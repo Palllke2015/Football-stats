@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import firebase from '../../../firebaseService'
 
 import { LOGINED, signOut } from '../../../actionCreators/auth/login'
+import { APIVERIFIED } from '../../../actionCreators/api-verified/apiVerified'
 import './style.scss'
 
 
@@ -19,7 +20,8 @@ class LoginBar extends Component{
             const token = localStorage.getItem("token");
             this.setState({loading: false});
             if (token === idToken) {
-              this.props.LOGINED(localStorage.getItem("email"))
+              this.props.LOGINED(localStorage.getItem("email"));
+              this.props.APIVERIFIED(localStorage.getItem("email"));
             }
           })
       }
@@ -82,4 +84,4 @@ const props = (state) => ({
   userEmail: state.auth.data.email
 });
 
-export default connect(props, { LOGINED, signOut })(LoginBar);
+export default connect(props, { LOGINED, signOut, APIVERIFIED })(LoginBar);

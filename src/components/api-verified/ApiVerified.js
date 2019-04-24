@@ -21,7 +21,6 @@ class ApiVerified extends Component {
       .get()
       .then(function(querySnapshot) {
         querySnapshot.forEach(async function (doc) {
-          console.log(`documentReference.id   = ${doc.id}`);
           const info = database.collection("users").doc(doc.id);
 
           database.runTransaction((transaction) => {
@@ -61,8 +60,8 @@ class ApiVerified extends Component {
           </label>
           <input
             type="button"
-            disabled={false}
-            value="disableFalse"
+            onClick={this.testApi}
+            value="TEST"
           />
           <button disabled={this.state.error}> Submit </button>
         </form>
