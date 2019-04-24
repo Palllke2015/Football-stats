@@ -1,4 +1,4 @@
-import firebase from '../../firebaseService'
+import firebase, { database } from '../../firebaseService'
 
 export const REGISTER = (email, password) => {
   return (dispatch) => {
@@ -6,7 +6,18 @@ export const REGISTER = (email, password) => {
     return (
       firebase.auth().createUserWithEmailAndPassword(email,password)
         .then(()=> {
-          dispatch(registerUserSuccess(email))
+          dispatch(registerUserSuccess(email));
+          database.collection("users").add({
+            email,
+            footballApi: false,
+            XAuthToken: ''
+          })
+            .then(function(docRef) {
+              console.log("Document written with ID: ", docRef.id);
+            })
+            .catch(function(error) {
+              console.error("Error adding document: ", error);
+            });
         })
         .catch((error) =>{
           dispatch(registerUserFailed(error.message))

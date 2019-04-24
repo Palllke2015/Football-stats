@@ -1,4 +1,5 @@
 import firebase from '../../firebaseService'
+import {APIVERIFIED} from '../api-verified/apiVerified'
 
 export const LOGIN = (email, password) => {
   return (dispatch) => {
@@ -9,8 +10,9 @@ export const LOGIN = (email, password) => {
           const user = firebase.auth().currentUser;
           if (user) {
             console.log('logined');
-            dispatch(loginUserSuccess(user))
-            localStorage.setItem("email", user.email)
+            dispatch(loginUserSuccess(user));
+            localStorage.setItem("email", user.email);
+            dispatch(APIVERIFIED(email));
           } else {
             console.log('not logined')
           }
@@ -21,7 +23,6 @@ export const LOGIN = (email, password) => {
             .catch((error) => {
               // Error occurred.
             });
-
         })
         .catch((error) => {
           dispatch(loginUserFailed(error.message));
@@ -70,3 +71,4 @@ const SIGNOUTFAILED = (error) => ({
   type: 'USER_SIGN_OUT_FAILED',
   error
 });
+

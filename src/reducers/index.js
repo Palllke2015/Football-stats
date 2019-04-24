@@ -5,6 +5,7 @@ import matchList from './matchList';
 import modal from './modal';
 import auth from './auth';
 import registration from './registration'
+import apiVerified from './api-verified'
 
 export default combineReducers({
   league,
@@ -12,5 +13,6 @@ export default combineReducers({
   matchList,
   modal,
   auth,
-  registration
+  registration,
+  apiVerified
 })

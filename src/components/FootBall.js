@@ -12,24 +12,30 @@ import Chat from './chat'
 import LoginBar from './auth/loginBar'
 import Login from './auth/loginBar/login'
 import Registration from './auth/loginBar/registration'
+import ApiVerified from "./api-verified";
 
 
 class FootBall extends Component {
+
   componentDidMount() {
     const {  fetchTableStart } = this.props;
     fetchTableStart();
+
   }
 
 
   render() {
-      const { showLastsMatches } = this.props;
+      const { showLastsMatches, loading, error } = this.props;
       const modal = showLastsMatches ? <div className="custom-modal-wrapper">
         <Modal />
       </div> : null;
+      let apiVerified = !loading && error ?  <ApiVerified /> : null;
+
       return (
         <div>
         <LoginBar />
         <Header/>
+          { apiVerified }
         <Switch>
           <Route path="/" exact render={()=><h2>Welcome to my app</h2>} />
           <Route
@@ -55,8 +61,11 @@ class FootBall extends Component {
     }
 }
 const mapStateToProps = (state) => ({
-  showLastsMatches: state.modal.show
+  showLastsMatches: state.modal.show,
+  loading: state.apiVerified.loading,
+  APIVerified: state.auth.APIVerified,
+  error: state.apiVerified.error
 });
 
 
-export default connect(mapStateToProps,{ fetchTableStart})(FootBall);
+export default connect(mapStateToProps,{ fetchTableStart })(FootBall);

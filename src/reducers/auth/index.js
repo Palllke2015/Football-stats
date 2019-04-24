@@ -7,7 +7,8 @@ const initStore = {
   error: false,
   errorMessage: '',
   loading: false,
-  signOutError: ''
+  signOutError: '',
+  XAuthToken:''
 };
 
 const auth = (state = initStore, action) => {
@@ -42,6 +43,12 @@ const auth = (state = initStore, action) => {
         error: true,
         loading: false,
         errorMessage: action.payload
+      };
+    case "USER_API_VERIFIED":
+      console.log( action.type);
+      return {...state,
+        APIVerified: true,
+        XAuthToken: action.XAuthToken
       };
     case "USER_SIGN_OUT":
       return {...state,
