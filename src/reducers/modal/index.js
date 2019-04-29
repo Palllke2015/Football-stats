@@ -1,5 +1,5 @@
 const itinState = {
-  loading: true,
+  loading: false,
   error: false,
   show: false,
   data: {
@@ -12,16 +12,17 @@ const itinState = {
   }
 };
 
-const modal = (state = itinState, action) => {
+const index = (state = itinState, action) => {
   switch (action.type) {
     case "FETCH_MODAL_START":
       return {...state,
         loading: true,
         show: true
       };
+
     case "CLOSE_MODAL":
       return {...state,
-        loading: true,
+        loading: false,
         show: false,
         data: {
           homeTeam: null,
@@ -32,50 +33,34 @@ const modal = (state = itinState, action) => {
           awayTeamLoading: true
         }
       };
-    case "FETCH_MODAL_HOME_NAME":
-      return {...state,
-        data: {
-        ...state.data,
-        homeTeamName: action.payload
-      }};
-    case "FETCH_MODAL_AWAY_NAME":
-      return {...state,
-        data: {
-          ...state.data,
-          awayTeamName: action.payload
-        }};
 
-    case "FETCH_MODAL_INFO":
+    case "FETCH_MODAL_SUCCESS":
       switch (action.team) {
+        case "HOME":
 
-        case "FETCH_MODAL_HOME_SUCCESS":
           return {...state,
             data: {
               ...state.data,
               homeTeam: action.payload,
-              homeTeamLoading: false
+              homeTeamLoading: false,
+              homeTeamName: action.teamName
             }
           };
-        case "FETCH_MODAL_AWAY_SUCCESS":
+        case "AWAY":
           return {...state,
             data: {
               ...state.data,
               awayTeam: action.payload,
-              awayTeamLoading: false
+              awayTeamLoading: false,
+              awayTeamName: action.teamName,
             }};
         default:
           return state;
       }
 
-    case "FETCH_MODAL_SUCCESS":
-      console.log("SUCCESS");
-      return {
-        ...state,
-        loading: false
-      };
     default:
       return state
   }
 };
 
-export default modal
+export default index

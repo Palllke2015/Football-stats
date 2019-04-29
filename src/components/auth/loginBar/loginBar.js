@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import firebase from '../../../firebaseService'
 
 import { LOGINED, signOut } from '../../../actionCreators/auth/login'
 import { APIVERIFIED } from '../../../actionCreators/api-verified/apiVerified'
@@ -9,34 +8,10 @@ import './style.scss'
 
 
 class LoginBar extends Component{
-  state = {
-    loading: true
-  };
-  componentWillMount() {
-    firebase.auth().onAuthStateChanged(( user )=> {
-      if (user) {
-        user.getIdToken()
-          .then((idToken) => {
-            const token = localStorage.getItem("token");
-            this.setState({loading: false});
-            if (token === idToken) {
-              this.props.LOGINED(localStorage.getItem("email"));
-              this.props.APIVERIFIED(localStorage.getItem("email"));
-            }
-          })
-      }
-      else {
-        this.setState({loading: false});
-      }
-    })
-  }
+
 
 
   render() {
-    const { loading } = this.state;
-    if (loading) {
-      return <h2>Loading....</h2>
-    }
     const { isLogin, userEmail } = this.props;
     const body = isLogin ?
       <div>

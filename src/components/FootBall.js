@@ -2,6 +2,8 @@ import React , { Component }from 'react'
 import { connect } from 'react-redux';
 import {  Switch, Route } from "react-router-dom";
 import { fetchTableStart } from "../actionCreators";
+import { APIVERIFIED } from '../actionCreators/api-verified/apiVerified'
+import { LOGINED } from '../actionCreators/auth/login'
 
 
 import League from './league'
@@ -13,19 +15,47 @@ import LoginBar from './auth/loginBar'
 import Login from './auth/loginBar/login'
 import Registration from './auth/loginBar/registration'
 import ApiVerified from "./api-verified";
+import firebase from "../firebaseService";
 
 
 class FootBall extends Component {
+  state = {
+    isLoading: true
+  };
+
+  componentWillMount() {
+    firebase.auth().onAuthStateChanged(( user )=> {
+      if (user) {
+        user.getIdToken()
+          .then((idToken) => {
+            const token = localStorage.getItem("token");
+            if (token === idToken) {
+              this.props.LOGINED(localStorage.getItem("email"));
+              this.props.APIVERIFIED(localStorage.getItem("email"));
+              this.setState({isLoading: false});
+            }
+            else {
+              this.setState({isLoading: false});
+            }
+          })
+      }
+      else {
+        this.setState({isLoading: false});
+      }
+    })
+  }
 
   componentDidMount() {
-    const {  fetchTableStart } = this.props;
-    fetchTableStart();
 
   }
 
 
   render() {
       const { showLastsMatches, loading, error } = this.props;
+      const { isLoading } = this.state;
+      if (isLoading) {
+        return (<h3>Loading...</h3>)
+      }
       const modal = showLastsMatches ? <div className="custom-modal-wrapper">
         <Modal />
       </div> : null;
@@ -68,4 +98,4 @@ const mapStateToProps = (state) => ({
 });
 
 
-export default connect(mapStateToProps,{ fetchTableStart })(FootBall);
+export default connect(mapStateToProps,{ fetchTableStart, APIVERIFIED, LOGINED })(FootBall);

@@ -2,10 +2,17 @@ import React, { Component } from 'react'
 import TableItem from './table-item'
 import { connect } from "react-redux";
 
+import { TABLE } from '../../actionCreators/table/table'
+
 class Table extends Component {
+
+  componentWillMount() {
+    this.props.TABLE('2021')
+  }
+
   render() {
-    const { table } = this.props;
-    if (table === null) {
+    const { table, loading } = this.props;
+    if (loading) {
       return (<div>
         <div className="spinner-border text-primary" role="status">
           <span className="sr-only">Loading...</span>
@@ -39,7 +46,8 @@ class Table extends Component {
 }
 
 const props = (state) => ({
-  table: state.table.data
+  table: state.table.data,
+  loading: state.table.loading
 });
 
-export default connect(props)(Table);
+export default connect(props, { TABLE })(Table);

@@ -5,12 +5,12 @@ const modal = (store) => (next) => (action) => {
 
   if (action.type === 'FETCH_MODAL_INFO') {
     const serverInfo = {
-      headers: {'X-Auth-Token': '863b82a484d741bfaa6e559f5b15731a'},
+      headers: {'X-Auth-Token': store.getState().apiVerified.XAuthToken},
       dataType: 'json',
       type: 'GET'
     };
     const _apiBase = `https://api.football-data.org/v2/teams/${action.link}/matches`;
-    next(fetchModalStart())
+    next(fetchModalStart());
     fetch(`${_apiBase}`, serverInfo)
     // convert the response to json
       .then(async resp => await resp.json())

@@ -10,7 +10,7 @@ export default function Header() {
             <NavLink exact activeClassName="is-active" to="/">Home</NavLink >
           </li>
           <li>
-            <NavLink activeClassName="is-active" to="/last-matches">Last Matches</NavLink >
+            <NavLink activeClassName="is-active" to="/last-matches">Leagues</NavLink >
           </li>
           <li>
             <NavLink activeClassName="is-active" to="/table">table</NavLink >

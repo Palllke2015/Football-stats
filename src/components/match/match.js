@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { SHOW_LAST_MATCHES, modalHomeTeamName, modalAwayTeamName, fetchModalInfo } from "../../actionCreators";
+import { MODAL } from "../../actionCreators/teamInfo/modal";
 
 
 class Match extends Component {
@@ -35,7 +35,7 @@ class Match extends Component {
         <span
           style={{width:250}}
         >{homeTeam}</span> <span>
-        {day} {arr[month]} - {hours}:{minutes}
+        {day} {arr[month]} - {hours}:{minutes < 9 ? '0' + minutes : minutes}
       </span> <span
         style={{width:250, textAlign: 'right'}}
       >{guestTeam}</span>
@@ -47,20 +47,10 @@ class Match extends Component {
     )
   }
   teamInfo = () => {
-    const { info, SHOW_LAST_MATCHES, modalHomeTeamName, modalAwayTeamName, fetchModalInfo} = this.props;
-    SHOW_LAST_MATCHES();
-    modalHomeTeamName(info.homeTeam.name);
-    modalAwayTeamName(info.awayTeam.name);
-    fetchModalInfo(info.homeTeam.id, "FETCH_MODAL_HOME_SUCCESS");
-    fetchModalInfo(info.awayTeam.id, "FETCH_MODAL_AWAY_SUCCESS");
+    const { info, MODAL} = this.props;
+    MODAL(info.awayTeam.id, 'AWAY', info.awayTeam.name);
+    MODAL(info.homeTeam.id, 'HOME', info.homeTeam.name);
   }
 }
 
-const mapDispatchToProps = {
-  SHOW_LAST_MATCHES,
-  modalHomeTeamName,
-  modalAwayTeamName,
-  fetchModalInfo
-};
-
-export default connect(null, mapDispatchToProps)(Match);
+export default connect(null, { MODAL })(Match);

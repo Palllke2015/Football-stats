@@ -10,7 +10,7 @@ class ApiVerified extends Component {
   };
 
   handleToken = (event) => {
-    this.setState({token: event.target.value})
+    this.setState({token: event.target.value, error: true})
   };
 
   updateToken = (event) => {
@@ -33,7 +33,6 @@ class ApiVerified extends Component {
   };
   testApi = () => {
     const { token } = this.state;
-    this.setState({error: false});
     const serverInfo = {
       headers: {'X-Auth-Token': token},
       dataType: 'json',

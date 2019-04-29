@@ -1,14 +1,14 @@
 import React, {Component} from 'react'
 import MatchList from "../match-list";
 import { connect } from 'react-redux';
-import { fetchMatchList, matchListShow } from "../../actionCreators";
+import { LEAGUE, matchListShow } from "../../actionCreators/league/league";
 import Spinner from "../spinner";
 
 class League extends Component {
 
-  componentDidMount() {
-    const { fetchMatchList, league } = this.props;
-    fetchMatchList(league);
+  componentWillMount() {
+    const { league, LEAGUE } = this.props;
+    LEAGUE(league);
   }
 
   render() {
@@ -26,9 +26,7 @@ class League extends Component {
       <ul className="list-group">
         <li className="list-group-item">
           <h2>{ name }</h2>
-          <button className='btn btn-primary' onClick={()=> {
-            matchListShow()
-          }}>{buttonText}</button>
+          <button className='btn btn-primary' onClick={ matchListShow }>{buttonText}</button>
           {isShow}
         </li>
       </ul>
@@ -37,14 +35,14 @@ class League extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  matchList: state.matchList.data,
-  isLoading: state.matchList.loading,
-  show: state.matchList.show
+  matchList: state.league.data,
+  isLoading: state.league.loading,
+  show: state.league.showLastsMatches
 });
 
 const mapDispatchToProps = {
-  fetchMatchList,
-  matchListShow
+  matchListShow,
+  LEAGUE
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(League);

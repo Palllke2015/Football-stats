@@ -18,15 +18,7 @@ export const fetchTableSuccess = payload => ({
   payload
 });
 
-export const fetchTableFail = error => ({
-  type: "FETCH_TABLE_FAIL",
-  payload:  error
-});
 
-export const fetchMatchList = link => ({
-  type: "START_MATCH_LIST",
-  payload: link
-});
 
 export const fetchMatchListStart = () => ({
   type: "FETCH_MATCH_LIST_START"
@@ -40,10 +32,6 @@ export const fetchMatchListSuccess = payload => ({
 export const fetchMatchListFail = error => ({
   type: "FETCH_MATCH_LIST_FAIL",
   payload:  error
-});
-
-export const matchListShow = () => ({
-  type: "MATCH_LIST_SHOW"
 });
 
 export const fetchModalStart = () => ({type: "FETCH_MODAL_START"})

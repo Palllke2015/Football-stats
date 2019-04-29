@@ -6,7 +6,7 @@ const apiMiddleware = (store) => next => action => {
     return next(action);
   } else {
     const serverInfo = {
-      headers: {'X-Auth-Token': '863b82a484d741bfaa6e559f5b15731a'},
+      headers: {'X-Auth-Token': store.getState().apiVerified.XAuthToken},
       dataType: 'json',
       type: 'GET'
     };

@@ -23,7 +23,9 @@ class TeamInfo extends Component{
     const lastMatches = result.filter((elem) => elem.status === 'FINISHED').reverse().slice(0,5).reverse().map((elem)=> {
       const date = new Date(elem.utcDate).toDateString();
       if (elem.score.winner === "DRAW") {
+
         if (elem.homeTeam.name === teamName) {
+
           return <li key={elem.id} style={{background:"grey"}}>{date} - {elem.homeTeam.name} {elem.score.fullTime.homeTeam}:{elem.score.fullTime.awayTeam} {elem.awayTeam.name}[{elem.competition.name}]</li>
         }
         if (elem.awayTeam.name === teamName) {
@@ -44,7 +46,6 @@ class TeamInfo extends Component{
       }
     return null;
     });
-
 
     const nextMatches = result.filter((elem) => elem.status === 'SCHEDULED').slice(0,5).map((elem)=> {
       let currentTeam;
