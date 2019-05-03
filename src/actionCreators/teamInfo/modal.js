@@ -37,3 +37,6 @@ const fetchModalError = (error) => ({
   type: 'FETCH_MODAL_ERROR',
   error
 });
+
+
+export const closeModal = () => ({type: "CLOSE_MODAL"});

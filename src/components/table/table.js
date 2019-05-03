@@ -11,13 +11,18 @@ class Table extends Component {
   }
 
   render() {
-    const { table, loading } = this.props;
+    const { loading, table, error, errorMessage } = this.props;
     if (loading) {
       return (<div>
         <div className="spinner-border text-primary" role="status">
           <span className="sr-only">Loading...</span>
         </div>
       </div>)
+    }
+    if (error) {
+      return <div>
+        {errorMessage}
+      </div>
     }
     const { standings } = table;
     const filter = standings.find((elem)=> elem.type === 'TOTAL');
@@ -47,7 +52,9 @@ class Table extends Component {
 
 const props = (state) => ({
   table: state.table.data,
-  loading: state.table.loading
+  loading: state.table.loading,
+  error: state.table.error,
+  errorMessage: state.table.errorMessage
 });
 
 export default connect(props, { TABLE })(Table);

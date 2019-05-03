@@ -2,7 +2,7 @@ import store from '../../store'
 
 export const LEAGUE = (link) => {
   return (dispatch) => {
-    dispatch(fetchLeagueStart);
+    dispatch(fetchLeagueStart());
     const serverInfo = {
       headers: {'X-Auth-Token': store.getState().apiVerified.XAuthToken},
       dataType: 'json',

@@ -1,5 +1,4 @@
 import {database} from '../../firebaseService';
-import { fetchTableStart } from '../index'
 
 export const APIVERIFIED = (email) => {
   return (dispatch) => {
@@ -10,9 +9,7 @@ export const APIVERIFIED = (email) => {
         querySnapshot.forEach(function(doc) {
           if (doc.data().footballApi) {
             dispatch(apiVerifiedSuccess(doc.data().XAuthToken));
-            dispatch(fetchTableStart())
           } else {
-            console.log('Я так понят что нету поля');
             dispatch(apiVerifiedStartError())
           }
         });

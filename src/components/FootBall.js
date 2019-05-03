@@ -1,7 +1,6 @@
 import React , { Component }from 'react'
 import { connect } from 'react-redux';
 import {  Switch, Route } from "react-router-dom";
-import { fetchTableStart } from "../actionCreators";
 import { APIVERIFIED } from '../actionCreators/api-verified/apiVerified'
 import { LOGINED } from '../actionCreators/auth/login'
 
@@ -16,6 +15,8 @@ import Login from './auth/loginBar/login'
 import Registration from './auth/loginBar/registration'
 import ApiVerified from "./api-verified";
 import firebase from "../firebaseService";
+import ApiModal from "./api-verified/api-modal";
+
 
 
 class FootBall extends Component {
@@ -43,10 +44,6 @@ class FootBall extends Component {
         this.setState({isLoading: false});
       }
     })
-  }
-
-  componentDidMount() {
-
   }
 
 
@@ -81,6 +78,7 @@ class FootBall extends Component {
           <Route path="/table" component={Table} exact />
           <Route path="/login" component={Login} exact />
           <Route path="/registration" component={Registration} exact />
+          <Route path="/apiModal" component={ApiModal} exact />
           <Route render={()=> {
             return( <h2>Page not exist</h2>)
           }} />
@@ -98,4 +96,4 @@ const mapStateToProps = (state) => ({
 });
 
 
-export default connect(mapStateToProps,{ fetchTableStart, APIVERIFIED, LOGINED })(FootBall);
+export default connect(mapStateToProps,{ APIVERIFIED, LOGINED })(FootBall);

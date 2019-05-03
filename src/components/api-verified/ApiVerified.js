@@ -6,7 +6,8 @@ import { connect } from "react-redux";
 class ApiVerified extends Component {
   state = {
     token: '',
-    error: true
+    error: true,
+    errorColor: false
   };
 
   handleToken = (event) => {
@@ -40,11 +41,14 @@ class ApiVerified extends Component {
     };
     fetch(`https://api.football-data.org/v2/competitions/CL/matches`, serverInfo)
       .then((data)=> data.json())
-      .then(() => this.setState({error: false}))
-      .catch((error) => this.setState({error: true}))
+      .then(() => this.setState({error: false, errorColor: false}))
+      .catch(() => this.setState({error: true, errorColor: true}))
   };
 
   render() {
+    const { errorColor, error } = this.state;
+    const wrongToken = <p style={{color: 'red'}}>Wrong Token</p>;
+    const goodToken = <p style={{color: 'green'}}>Good Token</p>;
     return(
       <div>
         <h4>You need to connect the football API to the application for full use.</h4>
@@ -55,6 +59,7 @@ class ApiVerified extends Component {
             <input
               onChange={this.handleToken}
               value={this.state.token}
+              style={{borderColor: errorColor ? 'red' :'black'}}
             />
           </label>
           <input
@@ -62,9 +67,10 @@ class ApiVerified extends Component {
             onClick={this.testApi}
             value="TEST"
           />
-          <button disabled={this.state.error}> Submit </button>
+          <button disabled={error}> Submit </button>
+          <p>{errorColor ? wrongToken : goodToken}</p>
         </form>
-        <Link to="/apiModal" >See instruction</Link>
+        <Link to="/apiModal">See instruction</Link>
       </div>
     )
   }

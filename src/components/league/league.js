@@ -12,10 +12,11 @@ class League extends Component {
   }
 
   render() {
-    const { show, isLoading, matchList, matchListShow} = this.props;
+    const { show, isLoading, matchList, matchListShow, error, errorMessage} = this.props;
     if (isLoading) {
       return (<Spinner/>)
     }
+    if  ( error ) return <div>{errorMessage}</div>;
     const  { competition: {name}, matches}  = matchList;
     const buttonText = show ? 'Hide Matches' : 'Show Matches';
     const isShow = show ? <MatchList
@@ -37,7 +38,9 @@ class League extends Component {
 const mapStateToProps = (state) => ({
   matchList: state.league.data,
   isLoading: state.league.loading,
-  show: state.league.showLastsMatches
+  show: state.league.showLastsMatches,
+  error: state.league.error,
+  errorMessage: state.league.errorMessage
 });
 
 const mapDispatchToProps = {

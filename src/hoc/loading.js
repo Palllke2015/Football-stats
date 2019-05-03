@@ -1,27 +1,19 @@
-import React, { Component } from 'react'
-import { connect } from "react-redux";
+import React from 'react'
 
-function WithLoading(Wrapped) {
-  class loading extends Component {
-
-    render() {
-      if (this.props.isLoading) {
-        return (
-          <div>
-            <div className="spinner-border text-primary" role="status">
-              <span className="sr-only">Loading...</span>
-            </div>
+const WithLoading = (Wrapped) => {
+  return (props) => {
+    if (props.loading) {
+      return (
+        <div>
+          <div className="spinner-border text-primary" role="status">
+            <span className="sr-only">Loading...</span>
           </div>
-        )
-      }
-      return (<Wrapped />)
-    }
+        </div>
+      )}
+    return(
+      <Wrapped  {...props}/>
+    )
   }
-  const props = (state) => ({
-    isLoading: state.table.loading
-  });
-  return connect(props)(loading);
-
 }
 
 export default WithLoading;

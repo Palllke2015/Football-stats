@@ -18,8 +18,8 @@ const index = (state = initialState, action) => {
     case 'FETCH_LEAGUE_START':
         return {...state,
          loading: true,
-         error: false,
-         showLastsMatches: false};
+         error: false
+        };
 
     case 'FETCH_MATCH_LIST_SUCCESS':
       return {...state,

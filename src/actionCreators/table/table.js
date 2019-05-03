@@ -3,21 +3,24 @@ import store from '../../store'
 
 export const TABLE = () => {
   return (dispatch) => {
-    dispatch(fetchTableStart);
+    dispatch(fetchTableStart());
     const serverInfo = {
       headers: {'X-Auth-Token': store.getState().apiVerified.XAuthToken},
       dataType: 'json',
       type: 'GET'
     };
+
     const _apiBase = `https://api.football-data.org/v2/competitions/${store.getState().league.data.competition.id}/standings`;
     fetch(`${_apiBase}`, serverInfo)
     // convert the response to json
-      .then(async resp => await resp.json())
+      .then(async resp => {
+        return await resp.json()
+      })
       .then( async json => {
         await dispatch(fetchTableSuccess(json))
       })
       .catch( err => {
-        fetchTableError(err.message)
+        dispatch(fetchTableError(err.message));
       });
     return false;
   }

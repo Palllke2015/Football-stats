@@ -9,7 +9,9 @@ const table = (state = initState, action) => {
   switch (action.type) {
     case 'FETCH_TABLE_START':
       return {...state,
-        loading: true};
+        loading: true,
+        error: false,
+        errorMessage: ''};
 
     case 'FETCH_TABLE_SUCCESS':
       return {...state,
