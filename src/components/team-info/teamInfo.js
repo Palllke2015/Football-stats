@@ -20,17 +20,23 @@ class TeamInfo extends Component{
       }
       return 0
     });
-    const lastMatches = result.filter((elem) => elem.status === 'FINISHED').reverse().slice(0,5).reverse().map((elem)=> {
+    const lastMatches = result.filter((elem) => elem.status === 'FINISHED').slice(-5).map((elem)=> {
       const date = new Date(elem.utcDate).toDateString();
-      if (elem.score.winner === "DRAW") {
-
+      let homeTeam, awayTeam, homeTeamScore, awayTeamScore;
+      if (elem.score.winner === 'DRAW') {
         if (elem.homeTeam.name === teamName) {
-
-          return <li key={elem.id} style={{background:"grey"}}>{date} - {elem.homeTeam.name} {elem.score.fullTime.homeTeam}:{elem.score.fullTime.awayTeam} {elem.awayTeam.name}[{elem.competition.name}]</li>
+          homeTeam = elem.homeTeam.name;
+          homeTeamScore = elem.score.fullTime.homeTeam;
+          awayTeam = elem.awayTeam.name;
+          awayTeamScore = elem.score.fullTime.awayTeam;
         }
         if (elem.awayTeam.name === teamName) {
-          return <li key={elem.id} style={{background:"grey"}}>{date} - {elem.awayTeam.name} {elem.score.fullTime.awayTeam}:{elem.score.fullTime.homeTeam} {elem.homeTeam.name}[{elem.competition.name}]</li>
+          awayTeam = elem.homeTeam.name;
+          awayTeamScore = elem.score.fullTime.homeTeam;
+          homeTeam = elem.awayTeam.name;
+          homeTeamScore = elem.score.fullTime.awayTeam;
         }
+        return <li key={elem.id} style={{background:'grey'}}>{date} - {homeTeam} {homeTeamScore}:{awayTeamScore} {awayTeam}[{elem.competition.name}]</li>
       }
       if (elem.homeTeam.name === teamName && elem.score.winner === 'HOME_TEAM') {
         return <li key={elem.id} style={{background:"green"}}>{date} - {elem.homeTeam.name} {elem.score.fullTime.homeTeam}:{elem.score.fullTime.awayTeam} {elem.awayTeam.name}[{elem.competition.name}]</li>
@@ -44,6 +50,7 @@ class TeamInfo extends Component{
       if (elem.homeTeam.name === teamName && elem.score.winner === 'AWAY_TEAM') {
         return <li key={elem.id} style={{background:"red"}}>{date} - {elem.homeTeam.name} {elem.score.fullTime.homeTeam}:{elem.score.fullTime.awayTeam} {elem.awayTeam.name}[{elem.competition.name}]</li>
       }
+
     return null;
     });
 
