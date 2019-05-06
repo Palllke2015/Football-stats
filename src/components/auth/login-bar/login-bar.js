@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { LOGINED, signOut } from '../../../actionCreators/auth/login'
-import { APIVERIFIED } from '../../../actionCreators/api-verified/apiVerified'
+import { APIVERIFIED } from '../../../actionCreators/api-verified/api-verified'
 import './style.scss'
 
 

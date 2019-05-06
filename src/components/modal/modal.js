@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { connect } from "react-redux";
-import { closeModal } from '../../actionCreators/teamInfo/modal'
+import { closeModal } from '../../actionCreators/team-Info/modal'
 import './style.css'
 import TeamInfo from "../team-info";
 

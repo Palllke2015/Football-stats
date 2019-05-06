@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from "react-redux";
 import './style.scss'
 import ChatLogin from './chat-login'
-import ChatList from './chatList'
+import ChatList from './chat-list'
 
 class Chat extends Component{
   idCount = 3;

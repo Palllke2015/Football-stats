@@ -1,3 +1,3 @@
-import ApiVerified from './ApiVerified';
+import ApiVerified from './api-verified';
 
 export default ApiVerified;

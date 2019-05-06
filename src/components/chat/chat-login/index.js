@@ -1,3 +1,3 @@
-import ChatLogin from './chatLogin'
+import ChatLogin from './chat-login'
 
 export default ChatLogin;

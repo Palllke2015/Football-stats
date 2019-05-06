@@ -1,5 +1,5 @@
-import firebase from '../../firebaseService'
-import { APIVERIFIED } from '../api-verified/apiVerified'
+import firebase from '../../firebase-service'
+import { APIVERIFIED } from '../api-verified/api-verified'
 
 export const LOGIN = (email, password) => {
   return (dispatch) => {

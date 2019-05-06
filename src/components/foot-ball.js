@@ -1,7 +1,7 @@
 import React , { Component }from 'react'
 import { connect } from 'react-redux';
 import {  Switch, Route } from "react-router-dom";
-import { APIVERIFIED } from '../actionCreators/api-verified/apiVerified'
+import { APIVERIFIED } from '../actionCreators/api-verified/api-verified'
 import { LOGINED } from '../actionCreators/auth/login'
 
 
@@ -10,11 +10,11 @@ import Modal from './modal'
 import Table from './table'
 import Header from "./header";
 import Chat from './chat'
-import LoginBar from './auth/loginBar'
-import Login from './auth/loginBar/login'
-import Registration from './auth/loginBar/registration'
+import LoginBar from './auth/login-bar'
+import Login from './auth/login-bar/login'
+import Registration from './auth/login-bar/registration'
 import ApiVerified from "./api-verified";
-import firebase from "../firebaseService";
+import firebase from "../firebase-service";
 import ApiModal from "./api-verified/api-modal";
 
 

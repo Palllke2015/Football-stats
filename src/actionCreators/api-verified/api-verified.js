@@ -1,4 +1,4 @@
-import {database} from '../../firebaseService';
+import {database} from '../../firebase-service';
 
 export const APIVERIFIED = (email) => {
   return (dispatch) => {

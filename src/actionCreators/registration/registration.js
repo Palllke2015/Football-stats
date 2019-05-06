@@ -1,4 +1,4 @@
-import firebase, { database } from '../../firebaseService'
+import firebase, { database } from '../../firebase-service'
 
 export const REGISTER = (email, password) => {
   return (dispatch) => {

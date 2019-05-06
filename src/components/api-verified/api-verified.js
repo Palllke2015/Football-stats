@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import {database} from "../../firebaseService";
+import {database} from "../../firebase-service";
 import { connect } from "react-redux";
 
 class ApiVerified extends Component {

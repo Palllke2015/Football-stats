@@ -31,22 +31,22 @@ class Registration extends Component {
     const isloading = loading ? <p>Loading...</p> : null;
     return(
       <div className="login-form-wrapper">
-      <ul>
-        <li>
-          <NavLink
-            to="/login"
-            activeClassName="selected"
-          >Login
-          </NavLink >
-          /
-          <NavLink
-            to="/registration"
-            activeClassName="selected"
-          >
-            Registration
-          </NavLink >
-        </li>
-      </ul>
+        <ul>
+          <li>
+            <NavLink
+              to="/login"
+              activeClassName="selected"
+            >Login
+            </NavLink >
+            /
+            <NavLink
+              to="/registration"
+              activeClassName="selected"
+            >
+              Registration
+            </NavLink >
+          </li>
+        </ul>
 
         <h2>Registration</h2>
         <form

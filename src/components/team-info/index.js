@@ -1,3 +1,3 @@
-import TeamInfo from './teamInfo'
+import TeamInfo from './team-info'
 
 export default TeamInfo
