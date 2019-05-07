@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { MODAL } from "../../actionCreators/team-Info/modal";
+import { MODAL } from "../../actionCreators/team-info/modal";
 
 
 class Match extends Component {
