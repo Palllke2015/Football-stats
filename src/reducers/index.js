@@ -1,10 +1,10 @@
-import { combineReducers } from 'redux'
-import league from './league'
-import table from './table'
+import { combineReducers } from 'redux';
+import league from './league';
+import table from './table';
 import modal from './modal';
 import auth from './auth';
-import registration from './registration'
-import apiVerified from './api-verified'
+import registration from './registration';
+import apiVerified from './api-verified';
 
 export default combineReducers({
   apiVerified,
@@ -13,4 +13,4 @@ export default combineReducers({
   modal,
   auth,
   registration
-})
+});

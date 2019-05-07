@@ -11,11 +11,11 @@ export const LEAGUE = (link) => {
     const _apiBase = `https://api.football-data.org/v2/competitions/${link}/matches`;
     fetch(`${_apiBase}`, serverInfo)
     // convert the response to json
-      .then(async resp => await resp.json())
-      .then( async json => {
-        await dispatch(fetchMatchListSuccess(json))
+      .then(resp => resp.json())
+      .then(json => {
+        dispatch(fetchMatchListSuccess(json));
       })
-      .catch( err => {
+      .catch(err => {
         dispatch(fetchMatchListError(err.message));
       });
   }
@@ -27,16 +27,16 @@ const fetchLeagueStart = () => ({
 });
 
 const fetchMatchListSuccess = payload => ({
-  type: "FETCH_MATCH_LIST_SUCCESS",
+  type: 'FETCH_MATCH_LIST_SUCCESS',
   payload
 });
 
 const fetchMatchListError = error => ({
-  type: "FETCH_MATCH_LIST_ERROR",
+  type: 'FETCH_MATCH_LIST_ERROR',
   error
 });
 
 
 export const matchListShow = () => ({
-  type: "MATCH_LIST_SHOW"
+  type: 'MATCH_LIST_SHOW'
 });

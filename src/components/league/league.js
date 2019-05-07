@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import MatchList from "../match-list";
+import MatchList from '../match-list';
 import { connect } from 'react-redux';
-import { LEAGUE, matchListShow } from "../../actionCreators/league/league";
-import Spinner from "../spinner";
+import { LEAGUE, matchListShow } from '../../actionCreators/league/league';
+import Spinner from '../spinner';
 
 class League extends Component {
 
@@ -14,7 +14,7 @@ class League extends Component {
   render() {
     const { show, isLoading, matchList, matchListShow, error, errorMessage} = this.props;
     if (isLoading) {
-      return (<Spinner/>)
+      return (<Spinner/>);
     }
     if  ( error ) return <div>{errorMessage}</div>;
     const  { competition: {name}, matches}  = matchList;

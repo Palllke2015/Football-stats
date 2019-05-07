@@ -11,7 +11,6 @@ class ChatLogin extends Component{
     let chatName, customUserName;
     if (radioSelected === 'email') {
       chatName = email ;
-
     }
     if (radioSelected === 'customLogin') {
       chatName = userName;
@@ -57,14 +56,15 @@ class ChatLogin extends Component{
           </form>
       </div>
     )
-  }
-  typeName = (evt) => {
-    this.setState({userName: evt.target.value})
   };
-  handleRadio = (event) => {
-    this.setState({radioSelected: event.target.value})
-  }
 
+  typeName = (evt) => {
+    this.setState({userName: evt.target.value});
+  };
+
+  handleRadio = (event) => {
+    this.setState({radioSelected: event.target.value});
+  }
 }
 
 export default ChatLogin;

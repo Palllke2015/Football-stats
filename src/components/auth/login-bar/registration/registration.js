@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { NavLink } from "react-router-dom";
-import { connect } from "react-redux";
+import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import { REGISTER } from '../../../../actionCreators/registration/registration'
 
@@ -20,7 +20,6 @@ class Registration extends Component {
     const { email, password } = this.state;
     this.props.REGISTER( email, password);
     this.setState({password: ''})
-
   };
 
   render() {

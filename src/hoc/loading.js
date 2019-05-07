@@ -14,6 +14,6 @@ const WithLoading = (Wrapped) => {
       <Wrapped  {...props}/>
     )
   }
-}
+};
 
 export default WithLoading;

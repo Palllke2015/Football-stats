@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {NavLink, Redirect} from 'react-router-dom'
 import { connect } from "react-redux";
-import { LOGIN } from '../../../../actionCreators/auth/login'
+import { LOGIN } from '../../../../actionCreators/auth/login';
 
 class Login extends Component {
   state = {
@@ -12,7 +12,7 @@ class Login extends Component {
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
-    })
+    });
   };
 
   render() {
@@ -24,7 +24,7 @@ class Login extends Component {
       return (
         <Redirect to="/"/>
       )
-    }
+    };
 
     return(
       <div className="login-form-wrapper">
@@ -79,7 +79,7 @@ class Login extends Component {
       </div>
     )
   }
-}
+};
 
 const props = (state) => ({
   redirect: state.auth.isLogin,

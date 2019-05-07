@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
-import TableItem from './table-item'
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import TableItem from './table-item';
+import { connect } from 'react-redux';
 
-import { TABLE } from '../../actionCreators/table/table'
+import { TABLE } from '../../actionCreators/table/table';
 
 class Table extends Component {
 
   componentWillMount() {
-    this.props.TABLE('2021')
-  }
+    this.props.TABLE('2021');
+  };
 
   render() {
     const { loading, table, error, errorMessage } = this.props;
@@ -47,7 +47,7 @@ class Table extends Component {
 
       </table>
     )
-  }
+  };
 }
 
 const props = (state) => ({

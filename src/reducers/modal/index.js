@@ -14,13 +14,13 @@ const itinState = {
 
 const index = (state = itinState, action) => {
   switch (action.type) {
-    case "FETCH_MODAL_START":
+    case 'FETCH_MODAL_START':
       return {...state,
         loading: true,
         show: true
       };
 
-    case "CLOSE_MODAL":
+    case 'CLOSE_MODAL':
       return {...state,
         loading: false,
         show: false,
@@ -34,9 +34,9 @@ const index = (state = itinState, action) => {
         }
       };
 
-    case "FETCH_MODAL_SUCCESS":
+    case 'FETCH_MODAL_SUCCESS':
       switch (action.team) {
-        case "HOME":
+        case 'HOME':
 
           return {...state,
             data: {
@@ -46,7 +46,7 @@ const index = (state = itinState, action) => {
               homeTeamName: action.teamName
             }
           };
-        case "AWAY":
+        case 'AWAY':
           return {...state,
             data: {
               ...state.data,
@@ -59,7 +59,7 @@ const index = (state = itinState, action) => {
       }
 
     default:
-      return state
+      return state;
   }
 };
 

@@ -1,5 +1,5 @@
-import React from 'react'
-import FootBall from './components/foot-ball'
+import React from 'react';
+import FootBall from './components/foot-ball';
 
 
 const App = () => {

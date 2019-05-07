@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import { closeModal } from '../../actionCreators/team-info/modal'
 import './style.css'
-import TeamInfo from "../team-info";
+import TeamInfo from '../team-info';
 
 class Modal extends Component{
 

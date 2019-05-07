@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Match from '../match'
 
-import Spinner from "../spinner";
+import Spinner from '../spinner';
 
 
 class MatchList extends Component {
@@ -17,12 +17,12 @@ class MatchList extends Component {
 
     const result = matches.sort((a, b)=> {
       if (a.utcDate < b.utcDate) {
-        return -1
+        return -1;
       }
       if (a.utcDate > b.utcDate) {
-        return 1
+        return 1;
       }
-      return 0
+      return 0;
     });
     const wasMatches = result.filter((elem) => elem.status === 'FINISHED').reverse().splice(0, 10).reverse().map((elem) => {
       return  <Match key={elem.id} info={elem} />
@@ -39,7 +39,7 @@ class MatchList extends Component {
         </ul>
       </div>
     )
-  }
+  };
 }
 
 export default MatchList;

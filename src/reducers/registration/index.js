@@ -8,14 +8,14 @@ const initStore = {
 const registration = (state = initStore, action) => {
   switch (action.type) {
 
-    case "REGISTER_USER_START":
+    case 'REGISTER_USER_START':
       console.log( action.type);
       return {...state,
         loading: true,
         error: false,
         errorMessage: ''
       };
-    case "REGISTER_USER_SUCCESS":
+    case 'REGISTER_USER_SUCCESS':
       console.log( action.type);
       return {...state,
         loading: false,
@@ -23,7 +23,7 @@ const registration = (state = initStore, action) => {
         errorMessage: '',
         successMessage: `You can now log in using your email: ${action.email}`
       };
-    case "REGISTER_USER_FAILED":
+    case 'REGISTER_USER_FAILED':
       console.log( action.type);
       return {...state,
         error: true,
@@ -32,7 +32,7 @@ const registration = (state = initStore, action) => {
       };
 
     default:
-      return state
+      return state;
   }
 };
 

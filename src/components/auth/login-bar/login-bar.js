@@ -1,23 +1,20 @@
 import React, { Component } from 'react'
-import { NavLink } from "react-router-dom";
-import { connect } from "react-redux";
+import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import { LOGINED, signOut } from '../../../actionCreators/auth/login'
-import { APIVERIFIED } from '../../../actionCreators/api-verified/api-verified'
 import './style.scss'
 
 
 class LoginBar extends Component{
 
-
-
   render() {
-    const { isLogin, userEmail } = this.props;
+    const { isLogin, userEmail, signOut } = this.props;
     const body = isLogin ?
       <div>
         {userEmail}
         <button
-          onClick={this.props.signOut}
+          onClick={signOut}
         >Log out</button>
       </div>
      :
@@ -59,4 +56,4 @@ const props = (state) => ({
   userEmail: state.auth.data.email
 });
 
-export default connect(props, { LOGINED, signOut, APIVERIFIED })(LoginBar);
+export default connect(props, { LOGINED, signOut })(LoginBar);

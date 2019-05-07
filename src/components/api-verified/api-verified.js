@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import {database} from "../../firebase-service";
 import { connect } from "react-redux";
+import { API_VERIFIED } from '../../actionCreators/api-verified/api-verified';
 
 class ApiVerified extends Component {
   state = {
@@ -17,16 +18,16 @@ class ApiVerified extends Component {
   updateToken = (event) => {
     event.preventDefault();
     const { token } = this.state;
-    const { email } = this.props;
-    database.collection("users").where("email", "==", email)
+    const { email, API_VERIFIED } = this.props;
+    database.collection('users').where('email', '==', email)
       .get()
       .then(function(querySnapshot) {
-        querySnapshot.forEach(async function (doc) {
-          const info = database.collection("users").doc(doc.id);
-
+        querySnapshot.forEach(function (doc) {
+          const info = database.collection('users').doc(doc.id);
           database.runTransaction((transaction) => {
             return transaction.get(info).then(function() {
               transaction.update(info, {  XAuthToken: token, footballApi: true });
+              API_VERIFIED(email);
             });
           })
         });
@@ -47,8 +48,8 @@ class ApiVerified extends Component {
 
   render() {
     const { errorColor, error } = this.state;
-    const wrongToken = <p style={{color: 'red'}}>Wrong Token</p>;
-    const goodToken = <p style={{color: 'green'}}>Good Token</p>;
+    const tokenText = errorColor ?
+      <p style={{color: 'red'}}>Wrong Token</p> : null ;
     return(
       <div>
         <h4>You need to connect the football API to the application for full use.</h4>
@@ -68,7 +69,7 @@ class ApiVerified extends Component {
             value="TEST"
           />
           <button disabled={error}> Submit </button>
-          <p>{errorColor ? wrongToken : goodToken}</p>
+          { tokenText }
         </form>
         <Link to="/apiModal">See instruction</Link>
       </div>
@@ -81,4 +82,4 @@ class ApiVerified extends Component {
 const props = (state) => ({
   email: state.auth.data.email
 });
-export default connect(props)(ApiVerified);
+export default connect(props, { API_VERIFIED })(ApiVerified);

@@ -5,7 +5,6 @@ import ChatLogin from './chat-login'
 import ChatList from './chat-list'
 
 class Chat extends Component{
-  idCount = 3;
   state = {
     isLogin: false,
     userName: '',
@@ -30,9 +29,9 @@ class Chat extends Component{
     const { isLogin } = this.state;
     const { email } = this.props;
     if (!email) {
-      return null
+      return null;
     }
-    const login = !isLogin ? <ChatLogin login={this.login} email={email}/> : <ChatList userName={email} />
+    const login = !isLogin ? <ChatLogin login={this.login} email={email}/> : <ChatList userName={email} />;
     return(
       <div className="chat-wrapper">
         <h2>Football Chat</h2>
@@ -42,7 +41,7 @@ class Chat extends Component{
   }
 
   login = (userName) => {
-    this.setState({ userName, isLogin:true })
+    this.setState({ userName, isLogin:true });
   };
 
 }

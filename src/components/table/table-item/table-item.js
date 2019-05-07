@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 class TableItem extends Component{
   render() {
-    const { info } = this.props
+    const { info } = this.props;
     return(
       <tr>
         <td>

@@ -22,8 +22,8 @@ class ChatList extends Component{
   };
 
   componentDidUpdate() {
-    this.scrollToMyRef()
-  }
+    this.scrollToMyRef();
+  };
   render() {
     const { messages } = this.state;
     const { userName } = this.props;
@@ -52,20 +52,22 @@ class ChatList extends Component{
         <button onClick={this.sendMessage}>Отправить</button>
       </div>
     )
-  }
+  };
+
   submit = (event) => {
     if(event.key === 'Enter') {
       event.preventDefault();
       this.sendMessage();
     }
   };
+
   myRef = null;
   scrollToMyRef = () => {
-    this.myRef.scrollTo(0, this.myRef.scrollHeight)
+    this.myRef.scrollTo(0, this.myRef.scrollHeight);
   };
 
   typeMessage = (event) => {
-    this.setState({userText: event.target.value})
+    this.setState({userText: event.target.value});
   };
   sendMessage = () => {
     this.idCount = this.idCount + 1;

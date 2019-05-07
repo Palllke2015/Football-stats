@@ -34,9 +34,21 @@ const index = (state = initialState, action) => {
         errorMessage: action.error
       };
     case 'MATCH_LIST_SHOW':
-      console.log( action.type)
+      console.log( action.type);
       return {...state,
         showLastsMatches: !state.showLastsMatches
+      };
+    case 'USER_SIGN_OUT':
+      return {
+        loading: true,
+        error: false,
+        errorMessage: '',
+        showLastsMatches: false,
+        data: {
+          competition: {
+            id: ''
+          }
+        }
       };
 
       default:

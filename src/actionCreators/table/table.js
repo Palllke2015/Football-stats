@@ -12,14 +12,11 @@ export const TABLE = () => {
 
     const _apiBase = `https://api.football-data.org/v2/competitions/${store.getState().league.data.competition.id}/standings`;
     fetch(`${_apiBase}`, serverInfo)
-    // convert the response to json
-      .then(async resp => {
-        return await resp.json()
+      .then(resp => resp.json())
+      .then(json => {
+         dispatch(fetchTableSuccess(json));
       })
-      .then( async json => {
-        await dispatch(fetchTableSuccess(json))
-      })
-      .catch( err => {
+      .catch(err => {
         dispatch(fetchTableError(err.message));
       });
     return false;

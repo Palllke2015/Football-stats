@@ -1,22 +1,19 @@
-import React , { Component }from 'react'
+import React , { Component }from 'react';
 import { connect } from 'react-redux';
 import {  Switch, Route } from "react-router-dom";
-import { APIVERIFIED } from '../actionCreators/api-verified/api-verified'
-import { LOGINED } from '../actionCreators/auth/login'
-
-
-import League from './league'
-import Modal from './modal'
-import Table from './table'
-import Header from "./header";
-import Chat from './chat'
-import LoginBar from './auth/login-bar'
-import Login from './auth/login-bar/login'
-import Registration from './auth/login-bar/registration'
-import ApiVerified from "./api-verified";
-import firebase from "../firebase-service";
-import ApiModal from "./api-verified/api-modal";
-
+import { API_VERIFIED } from '../actionCreators/api-verified/api-verified';
+import { LOGINED } from '../actionCreators/auth/login';
+import League from './league';
+import Modal from './modal';
+import Table from './table';
+import Header from './header';
+import Chat from './chat';
+import LoginBar from './auth/login-bar';
+import Login from './auth/login-bar/login';
+import Registration from './auth/login-bar/registration';
+import ApiVerified from './api-verified';
+import firebase from '../firebase-service';
+import ApiModal from './api-verified/api-modal';
 
 
 class FootBall extends Component {
@@ -25,14 +22,15 @@ class FootBall extends Component {
   };
 
   componentWillMount() {
+    const {API_VERIFIED, LOGINED} = this.props;
     firebase.auth().onAuthStateChanged(( user )=> {
       if (user) {
         user.getIdToken()
           .then((idToken) => {
-            const token = localStorage.getItem("token");
+            const token = localStorage.getItem('token');
             if (token === idToken) {
-              this.props.LOGINED(localStorage.getItem("email"));
-              this.props.APIVERIFIED(localStorage.getItem("email"));
+              LOGINED(localStorage.getItem('email'));
+              API_VERIFIED(localStorage.getItem('email'));
               this.setState({isLoading: false});
             }
             else {
@@ -44,8 +42,7 @@ class FootBall extends Component {
         this.setState({isLoading: false});
       }
     })
-  }
-
+  };
 
   render() {
       const { showLastsMatches, loading, error } = this.props;
@@ -96,4 +93,4 @@ const mapStateToProps = (state) => ({
 });
 
 
-export default connect(mapStateToProps,{ APIVERIFIED, LOGINED })(FootBall);
+export default connect(mapStateToProps,{ API_VERIFIED, LOGINED })(FootBall);

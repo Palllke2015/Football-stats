@@ -7,20 +7,20 @@ export const REGISTER = (email, password) => {
       firebase.auth().createUserWithEmailAndPassword(email,password)
         .then(()=> {
           dispatch(registerUserSuccess(email));
-          database.collection("users").add({
+          database.collection('users').add({
             email,
             footballApi: false,
             XAuthToken: ''
           })
             .then(function(docRef) {
-              console.log("Document written with ID: ", docRef.id);
+              console.log('Document written with ID: ', docRef.id);
             })
             .catch(function(error) {
-              console.error("Error adding document: ", error);
+              console.error('Error adding document: ', error);
             });
         })
         .catch((error) =>{
-          dispatch(registerUserFailed(error.message))
+          dispatch(registerUserFailed(error.message));
         })
     )
   }

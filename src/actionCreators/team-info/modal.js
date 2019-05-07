@@ -11,10 +11,9 @@ export const MODAL = (link, team, teamName) => {
     };
     const _apiBase = `https://api.football-data.org/v2/teams/${link}/matches`;
     fetch(`${_apiBase}`, serverInfo)
-    // convert the response to json
-      .then(async resp => await resp.json())
-      .then(async json => {
-        await dispatch(fetchModalSuccess(team, teamName, json));
+      .then(resp => resp.json())
+      .then(json => {
+        dispatch(fetchModalSuccess(team, teamName, json));
       })
       .catch(err => {
         dispatch(fetchModalError(err.message));
@@ -39,4 +38,4 @@ const fetchModalError = (error) => ({
 });
 
 
-export const closeModal = () => ({type: "CLOSE_MODAL"});
+export const closeModal = () => ({type: 'CLOSE_MODAL'});

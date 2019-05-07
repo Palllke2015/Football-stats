@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { MODAL } from "../../actionCreators/team-info/modal";
+import { MODAL } from '../../actionCreators/team-info/modal';
 
 
 class Match extends Component {
-  render() {
 
+  render() {
     const { info } = this.props;
     const {
       awayTeam: {
@@ -19,6 +19,7 @@ class Match extends Component {
       status,
       utcDate
     } = info;
+
     if (status === 'FINISHED') {
       return <li className='d-flex justify-content-between border-bottom' onClick={this.teamInfo}><span style={{width:250}}>{homeTeam}</span> <span>{golCountHome} : {golCountGuest}</span> <span style={{width:250, textAlign: 'right'}}>{guestTeam}</span>
       </li>
@@ -45,7 +46,8 @@ class Match extends Component {
     return (
       <li className='d-flex justify-content-center border-bottom' onClick={this.teamInfo}>{homeTeam} -  {guestTeam}</li>
     )
-  }
+  };
+
   teamInfo = () => {
     const { info, MODAL} = this.props;
     MODAL(info.awayTeam.id, 'AWAY', info.awayTeam.name);

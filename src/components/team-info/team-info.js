@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Spinner from "../spinner";
+import Spinner from '../spinner';
 
 
 class TeamInfo extends Component{
@@ -7,18 +7,18 @@ class TeamInfo extends Component{
   render() {
     const {loading} = this.props;
     if (loading) {
-      return (<Spinner/>)
+      return <Spinner/>;
     }
     const { matchList: {matches}, teamName } = this.props;
 
     const result = matches.sort((a,b) => {
       if (a.utcDate < b.utcDate) {
-        return -1
+        return -1;
       }
       if (a.utcDate > b.utcDate) {
-        return 1
+        return 1;
       }
-      return 0
+      return 0;
     });
     const lastMatches = result.filter((elem) => elem.status === 'FINISHED').slice(-5).map((elem)=> {
       const date = new Date(elem.utcDate).toDateString();
@@ -84,7 +84,5 @@ class TeamInfo extends Component{
     )
   }
 }
-
-
 
 export default TeamInfo;

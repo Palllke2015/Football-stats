@@ -22,10 +22,17 @@ const table = (state = initState, action) => {
         loading: false,
         error: true,
         errorMessage: action.error
-
       };
+    case 'USER_SIGN_OUT':
+      return {
+        loading: true,
+        data: null,
+        error: false,
+        errorMessage: ''
+      };
+
     default:
-      return state
+      return state;
   }
 };
 export default table;

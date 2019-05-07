@@ -1,16 +1,16 @@
 import {database} from '../../firebase-service';
 
-export const APIVERIFIED = (email) => {
+export const API_VERIFIED = (email) => {
   return (dispatch) => {
     dispatch(apiVerifiedStart());
-    database.collection("users").where("email", "==", email)
+    database.collection('users').where('email', '==', email)
       .get()
       .then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
           if (doc.data().footballApi) {
             dispatch(apiVerifiedSuccess(doc.data().XAuthToken));
           } else {
-            dispatch(apiVerifiedStartError())
+            dispatch(apiVerifiedStartError());
           }
         });
       })

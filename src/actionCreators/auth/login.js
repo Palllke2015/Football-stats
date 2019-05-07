@@ -1,5 +1,5 @@
 import firebase from '../../firebase-service'
-import { APIVERIFIED } from '../api-verified/api-verified'
+import { API_VERIFIED } from '../api-verified/api-verified'
 
 export const LOGIN = (email, password) => {
   return (dispatch) => {
@@ -12,13 +12,13 @@ export const LOGIN = (email, password) => {
             console.log('logined');
             dispatch(loginUserSuccess(user));
             localStorage.setItem("email", user.email);
-            dispatch(APIVERIFIED(email));
+            dispatch(API_VERIFIED(email));
           } else {
-            console.log('not logined')
+            console.log('not logined');
           }
           user.getIdToken()
             .then((idToken) => {
-              localStorage.setItem("token", idToken)
+              localStorage.setItem("token", idToken);
             })
             .catch((error) => {
               // Error occurred.
@@ -57,9 +57,9 @@ export const signOut = () => {
   return (dispatch) => {
     firebase.auth().signOut()
       .then(function() {
-        dispatch(SIGNOUT())
+        dispatch(SIGNOUT());
       }).catch(function(error) {
-        dispatch(SIGNOUTFAILED(error))
+        dispatch(SIGNOUTFAILED(error));
     });
   }
 };
