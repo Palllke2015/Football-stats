@@ -7,7 +7,14 @@
 * `react-router-dom`
 * `redux-thunk`
 
-Ограничение API Fooball 10 запросов в минуту.
+Ограничение API Football 10 запросов в минуту.
+
+### Быстрый старт
+
+1. Скачайте последнюю версию.
+2. Установите зависимости `npm install`.
+3. Запустите проект `npm start`.
+
 
 ### Описание 
 * В проэкте инпользовал `FireBase` и [Fooball Api](https://www.football-data.org/). 
