@@ -13,7 +13,7 @@ class Table extends Component {
   render() {
     const { loading, table, error, errorMessage } = this.props;
     if (loading) {
-      return (<div>
+      return (<div> 
         <div className="spinner-border text-primary" role="status">
           <span className="sr-only">Loading...</span>
         </div>

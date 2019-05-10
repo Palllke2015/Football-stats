@@ -6,7 +6,7 @@ import Spinner from '../spinner';
 
 class League extends Component {
 
-  componentWillMount() {
+  componentDidMount() {
     const { league, LEAGUE } = this.props;
     LEAGUE(league);
   }
@@ -38,6 +38,7 @@ class League extends Component {
 const mapStateToProps = (state) => ({
   matchList: state.league.data,
   isLoading: state.league.loading,
+  loading: state.league.loading,
   show: state.league.showLastsMatches,
   error: state.league.error,
   errorMessage: state.league.errorMessage

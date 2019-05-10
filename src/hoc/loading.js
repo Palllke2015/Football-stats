@@ -1,19 +1,18 @@
 import React from 'react'
 
-const WithLoading = (Wrapped) => {
+function WithLoading(Wrapped) {
   return (props) => {
     if (props.loading) {
       return (
-        <div>
-          <div className="spinner-border text-primary" role="status">
-            <span className="sr-only">Loading...</span>
-          </div>
+        <div className="spinner-border text-danger" role="status">
+          <span className="sr-only">Loading...</span>
         </div>
-      )}
+      )
+    }
     return(
-      <Wrapped  {...props}/>
+      <Wrapped {...props} />
     )
   }
-};
+}
 
 export default WithLoading;

@@ -1,5 +1,7 @@
-import WithLoading from './loading'
+import WithLoading from './loading';
+import IsLogin from './is-login';
 
 export {
-  WithLoading
+  WithLoading,
+  IsLogin
 }

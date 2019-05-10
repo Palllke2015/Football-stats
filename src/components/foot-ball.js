@@ -58,7 +58,7 @@ class FootBall extends Component {
       return (
         <div>
         <LoginBar />
-        <Header/>
+        <Header foo={'bar'}/>
           { apiVerified }
         <Switch>
           <Route path="/" exact render={()=><h2>Welcome to my app</h2>} />

@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './style.css'
+import './style.css';
+import { IsLogin } from '../../hoc'
 
-export default function Header() {
+function Header() {
   return(
       <nav>
         <ul>
@@ -17,6 +18,7 @@ export default function Header() {
           </li>
         </ul>
       </nav>
-
   )
 }
+
+export default IsLogin(Header);
