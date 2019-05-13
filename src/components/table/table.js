@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TableItem from './table-item';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 import { TABLE } from '../../actionCreators/table/table';
 
@@ -19,11 +20,19 @@ class Table extends Component {
         </div>
       </div>)
     }
+    if (table === null || table.errorCode) {
+      return (
+        <div>
+          Please select <NavLink to={'/last-matches'}> League</NavLink>
+        </div>
+      )
+    }
     if (error) {
       return <div>
         {errorMessage}
       </div>
     }
+
     const { standings } = table;
     const filter = standings.find((elem)=> elem.type === 'TOTAL');
     const { table: list } = filter;

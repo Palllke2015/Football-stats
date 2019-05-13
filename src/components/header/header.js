@@ -8,13 +8,13 @@ function Header() {
       <nav>
         <ul>
           <li>
-            <NavLink exact activeClassName="is-active" to="/">Home</NavLink >
+            <NavLink exact activeClassName="is-active" to="/">Home</NavLink>
           </li>
           <li>
-            <NavLink activeClassName="is-active" to="/last-matches">Leagues</NavLink >
+            <NavLink activeClassName="is-active" to="/last-matches">Leagues</NavLink>
           </li>
           <li>
-            <NavLink activeClassName="is-active" to="/table">table</NavLink >
+            <NavLink activeClassName="is-active" to="/table">table</NavLink>
           </li>
         </ul>
       </nav>

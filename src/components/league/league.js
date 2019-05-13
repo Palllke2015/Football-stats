@@ -16,10 +16,23 @@ class League extends Component {
   };
 
   componentDidMount() {
-    const { LEAGUE } = this.props;
-    const { selectedOption: {value} } = this.state;
-    LEAGUE(value);
+    this.loadingLeague();
   }
+
+  loadingLeague = () => {
+    const { apiVerified, LEAGUE, competitionId } = this.props;
+    const { selectedOption: {value} } = this.state;
+    if ( competitionId !== '') {
+      return null;
+    }
+    setTimeout(()=>{
+      if (apiVerified !== '') {
+        LEAGUE(value)
+      } else {
+        this.loadingLeague()
+      }
+    }, 500);
+  };
 
   handleMatchListShow = () => {
     this.props.matchListShow()
@@ -31,7 +44,6 @@ class League extends Component {
       return (<Spinner/>);
     }
     if  ( error ) return <div>{errorMessage}</div>;
-
 
     return(
       <div>
@@ -51,12 +63,14 @@ class League extends Component {
 
 const mapStateToProps = (state) => ({
   matchList: state.league.data,
+  competitionId: state.league.data.competition.id,
   isLoading: state.league.loading,
   loading: state.league.loading,
   show: state.league.showLastsMatches,
   error: state.league.error,
   errorMessage: state.league.errorMessage,
-  leagueCode: state.select.value
+  leagueCode: state.select.value,
+  apiVerified: state.apiVerified.XAuthToken
 });
 
 const mapDispatchToProps = {
