@@ -1,36 +1,50 @@
-import React, {Component} from 'react'
-import MatchList from '../match-list';
+import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { LEAGUE, matchListShow } from '../../actionCreators/league/league';
 import Spinner from '../spinner';
+import LeagueItem from './league-item';
+import SelectComponent from '../select';
+
 
 class League extends Component {
 
+  state = {
+    selectedOption: {
+      value: 'PL',
+      label: 'Premier League'
+    }
+  };
+
   componentDidMount() {
-    const { league, LEAGUE } = this.props;
-    LEAGUE(league);
+    const { LEAGUE } = this.props;
+    const { selectedOption: {value} } = this.state;
+    LEAGUE(value);
   }
 
+  handleMatchListShow = () => {
+    this.props.matchListShow()
+  };
+
   render() {
-    const { show, isLoading, matchList, matchListShow, error, errorMessage} = this.props;
+    const { show, isLoading, matchList:{ competition: {name}, matches },  error, errorMessage} = this.props;
     if (isLoading) {
       return (<Spinner/>);
     }
     if  ( error ) return <div>{errorMessage}</div>;
-    const  { competition: {name}, matches}  = matchList;
-    const buttonText = show ? 'Hide Matches' : 'Show Matches';
-    const isShow = show ? <MatchList
-      matches={matches}
-      isLoading={isLoading}
-    /> : null;
+
+
     return(
-      <ul className="list-group">
-        <li className="list-group-item">
-          <h2>{ name }</h2>
-          <button className='btn btn-primary' onClick={ matchListShow }>{buttonText}</button>
-          {isShow}
-        </li>
-      </ul>
+      <div>
+        <SelectComponent />
+
+      <LeagueItem
+        matchListShow={this.handleMatchListShow}
+        name={name}
+        show={show}
+        matches={matches}
+        isLoading={isLoading}
+      />
+      </div>
     )
   }
 }
@@ -41,7 +55,8 @@ const mapStateToProps = (state) => ({
   loading: state.league.loading,
   show: state.league.showLastsMatches,
   error: state.league.error,
-  errorMessage: state.league.errorMessage
+  errorMessage: state.league.errorMessage,
+  leagueCode: state.select.value
 });
 
 const mapDispatchToProps = {

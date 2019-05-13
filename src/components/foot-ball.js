@@ -58,7 +58,7 @@ class FootBall extends Component {
       return (
         <div>
         <LoginBar />
-        <Header foo={'bar'}/>
+        <Header/>
           { apiVerified }
         <Switch>
           <Route path="/" exact render={()=><h2>Welcome to my app</h2>} />
@@ -67,7 +67,7 @@ class FootBall extends Component {
             render={()=>{
             return(
               <div>
-                  <League league={"PL"}/>
+                  <League />
                   { modal }
               </div>
             )

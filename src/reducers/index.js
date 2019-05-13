@@ -5,6 +5,7 @@ import modal from './modal';
 import auth from './auth';
 import registration from './registration';
 import apiVerified from './api-verified';
+import select from './select';
 
 export default combineReducers({
   apiVerified,
@@ -12,5 +13,6 @@ export default combineReducers({
   table,
   modal,
   auth,
-  registration
+  registration,
+  select
 });

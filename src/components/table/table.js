@@ -13,7 +13,7 @@ class Table extends Component {
   render() {
     const { loading, table, error, errorMessage } = this.props;
     if (loading) {
-      return (<div> 
+      return (<div>
         <div className="spinner-border text-primary" role="status">
           <span className="sr-only">Loading...</span>
         </div>
@@ -31,21 +31,24 @@ class Table extends Component {
       return <TableItem key={elem.team.id} info={elem} />
     });
     return(
-      <table>
-        <tbody>
-        <tr>
-          <td>Место</td>
-          <td>Название</td>
-          <td>Очки</td>
-          <td>Игр сыграно</td>
-          <td>Побед</td>
-          <td>Поражений</td>
-          <td>Ничьих</td>
-        </tr>
+      <div>
+        <table>
+          <tbody>
+          <tr>
+            <td>Место</td>
+            <td>Название</td>
+            <td>Очки</td>
+            <td>Игр сыграно</td>
+            <td>Побед</td>
+            <td>Поражений</td>
+            <td>Ничьих</td>
+          </tr>
           {res}
-        </tbody>
+          </tbody>
 
-      </table>
+        </table>
+      </div>
+
     )
   };
 }
