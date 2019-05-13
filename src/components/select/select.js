@@ -6,12 +6,6 @@ import { LEAGUE } from '../../actionCreators/league/league'
 
 class SelectComponent extends Component {
 
-  state = {
-    selectedOption: {
-      value: 'PL',
-      label: 'Premier League'
-    }
-  };
 
   options = [
     { value: 'PD', label: 'La League (Primera Division)' },
@@ -21,31 +15,25 @@ class SelectComponent extends Component {
   ];
 
   handleChange = (info) => {
-
-    this.setState({
-      selectedOption: {
-        value: info.value,
-        label: info.label
-      }
-    });
-    this.props.SELECT(info.value);
+    this.props.SELECT(info.value, info.label);
     this.props.LEAGUE(info.value);
-
   };
 
   render() {
+    const { label, value} = this.props;
     return(
       <Select
         options={this.options}
         onChange={this.handleChange}
-        value={this.state.selectedOption}
+        value={{label,value}}
       />
     )
   }
 }
 
 const props = (state) =>({
-  value: state.select.value
+  value: state.select.value,
+  label: state.select.label
 });
 
 export default connect(props, { SELECT, LEAGUE })(SelectComponent);
